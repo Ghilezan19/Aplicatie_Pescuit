@@ -1,4 +1,6 @@
 package org.example.demo2.repository;
 
-public class CatchRepository {
-}
+import org.example.demo2.model.Catch;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CatchRepository extends JpaRepository<Catch, Long> {}

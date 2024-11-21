@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Adaugă Competiție</title>
+</head>
+<body>
+<h1>Adaugă Competiție</h1>
+<form action="/save-tournament" method="post">
+    <label for="name">Nume Competiție:</label>
+    <input type="text" id="name" name="name"><br>
+
+    <label for="location">Locație:</label>
+    <input type="text" id="location" name="location"><br>
+
+    <label for="date">Dată:</label>
+    <input type="date" id="date" name="date"><br>
+
+    <label for="entryFee">Taxă Intrare:</label>
+    <input type="number" step="0.1" id="entryFee" name="entryFee"><br>
+
+    <label for="rules">Reguli:</label>
+    <textarea id="rules" name="rules"></textarea><br>
+
+    <button type="submit">Adaugă</button>
+</form>
+</body>
+</html>
