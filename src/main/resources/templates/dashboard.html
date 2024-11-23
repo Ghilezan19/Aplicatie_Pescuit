@@ -1,9 +1,27 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link rel="stylesheet" th:href="@{/style1.css}">
 </head>
 <body>
-<h1 th:text="${message}">Welcome to the Dashboard</h1>
+<div class="container">
+    <h1>Welcome, <span th:text="${username}"></span>!</h1>
+    <p>Email: <span th:text="${email}"></span></p>
+    <p>Roles: <span th:text="${roles}"></span></p> <!-- Afișează rolurile -->
+
+    <!-- Butoane pentru acțiuni -->
+    <div class="actions">
+        <!-- Buton pentru adăugare competiție -->
+        <a href="/competitions/add" class="btn btn-primary">Add Competition</a>
+
+        <!-- Buton pentru adăugare participant -->
+        <a href="/participants/add" class="btn btn-primary">Add Participant</a>
+    </div>
+
+    <a href="/logout" class="logout-btn">Logout</a>
+</div>
 </body>
 </html>

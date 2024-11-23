@@ -1,0 +1,104 @@
+/* Fundalul paginii */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+    background-image: url('lake1.jpg'); /* Calea către imagine */
+    background-size: cover; /* Imaginea acoperă întregul ecran */
+    background-position: center center; /* Centrează imaginea */
+    background-attachment: fixed; /* Creează efectul de parallax */
+    animation: moveBackground 30s linear infinite; /* Mișcare lentă a imaginii */
+    display: flex;
+    justify-content: flex-start; /* Aliniază containerul la stânga */
+    align-items: flex-start; /* Aliniază vertical în stânga */
+    height: 100vh; /* Înălțimea paginii */
+}
+
+/* Animația pentru fundal */
+@keyframes moveBackground {
+    0% {
+        background-position: 30% 30%;
+    }
+    100% {
+        background-position: 100% 100%;
+    }
+}
+
+/* Containerul principal */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 50px auto;
+    background: rgba(255, 255, 255, 0.8); /* Fundal alb semi-transparent */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    text-align: left; /* Aliniază totul la stânga */
+    overflow-y: auto; /* Permite derularea verticală */
+    height: calc(100vh - 100px); /* Permite scroll pe înălțime */
+}
+
+/* Titlu */
+h1 {
+    color: #007bff;
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+/* Buton Adăugare */
+.add-btn {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.add-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Tabel */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    table-layout: fixed; /* Împiedică lățimea tabelului să depășească ecranul */
+}
+
+thead {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+th, td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #dee2e6;
+    word-wrap: break-word; /* Asigură că textul lung se încadrează corect */
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+tbody tr:hover {
+    background-color: #e2e6ea;
+}
+
+/* Buton Ștergere */
+.delete-btn {
+    color: #dc3545;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.delete-btn:hover {
+    color: #a71d2a;
+}

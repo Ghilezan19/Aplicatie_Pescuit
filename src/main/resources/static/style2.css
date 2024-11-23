@@ -1,0 +1,83 @@
+/* Stilizare pentru întregul body */
+body {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('lake1.jpg'); /* Calea către imaginea ta */
+    background-size: cover; /* Asigură-te că imaginea acoperă întregul ecran */
+    background-position: center center; /* Centrează imaginea */
+    background-attachment: fixed; /* Efect de parallax */
+    font-family: 'Arial', sans-serif;
+    animation: moveBackground 30s linear infinite; /* Animația de mișcare a imaginii */
+}
+
+/* Animația de mișcare a fundalului */
+@keyframes moveBackground {
+    0% {
+        background-position: 30% 30%;
+    }
+    100% {
+        background-position: 100% 100%;
+    }
+}
+
+/* Centrarea conținutului în interiorul containerului */
+.container {
+    text-align: center;
+    padding: 40px 60px;
+    border-radius: 10px;
+    max-width: 600px;
+    width: 100%;
+}
+
+/* Stilizare pentru titlu */
+h1 {
+    font-size: 2.5em;
+    color: #d9534f; /* Culoare roșie pentru titlul de eroare */
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Stil pentru mesajul de eroare */
+p {
+    font-size: 1.2em;
+    color: #00fdcd; /* Culoare gri pentru textul principal */
+    margin-bottom: 30px;
+}
+
+/* Stilizare pentru buton */
+.btn {
+    padding: 12px 24px;
+    background-color: #0275d8; /* Culoare albastră pentru buton */
+    color: white;
+    text-decoration: none;
+    font-size: 1.1em;
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Efect de hover pentru buton */
+.btn:hover {
+    background-color: #025aa5; /* Schimbare la hover pentru albastru mai închis */
+    transform: translateY(-3px); /* Efect de ridicare la hover */
+}
+
+/* Responsivitate pentru dispozitive mobile */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px 30px;
+    }
+    h1 {
+        font-size: 2em;
+    }
+    p {
+        font-size: 1em;
+    }
+    .btn {
+        padding: 10px 20px;
+    }
+}

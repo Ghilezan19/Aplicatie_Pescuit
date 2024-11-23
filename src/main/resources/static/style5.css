@@ -1,0 +1,102 @@
+/* Fundalul paginii */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+    background-image: url('lake1.jpg'); /* Calea către imagine */
+    background-size: cover; /* Imaginea acoperă întregul ecran */
+    background-position: center center; /* Centrează imaginea */
+    background-attachment: fixed; /* Creează efectul de parallax */
+    animation: moveBackground 30s linear infinite; /* Mișcare lentă a imaginii */
+    display: flex;
+    justify-content: flex-start; /* Aliniază containerul la stânga */
+    align-items: flex-start; /* Aliniază vertical în stânga */
+    height: 100vh; /* Înălțimea paginii */
+}
+
+/* Animația pentru fundal */
+@keyframes moveBackground {
+    0% {
+        background-position: 30% 30%;
+    }
+    100% {
+        background-position: 100% 100%;
+    }
+}
+
+/* Containerul formularului */
+.form-container {
+    background: rgb(135, 204, 139); /* Fundal alb semi-transparent */
+    border-radius: 10px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* Umbra containerului */
+    padding: 20px; /* Reduce paddingul pentru a micșora dimensiunea formularului */
+    width: 100%;
+    max-width: 350px; /* Redu dimensiunea maximă a formularului */
+    text-align: center;
+    margin: 0; /* Elimină spațiul de sus și jos */
+}
+
+/* Titlu */
+h1 {
+    font-size: 20px; /* Reduce dimensiunea titlului */
+    margin-bottom: 15px; /* Micșorează spațiul sub titlu */
+    color: #007bff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); /* Umbră pentru lizibilitate */
+}
+
+/* Formă generală */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Grupuri de input */
+.form-group {
+    margin-bottom: 12px; /* Micșorează spațiul dintre grupuri */
+    text-align: left;
+}
+
+/* Etichete */
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #495057;
+}
+
+/* Inputuri */
+input {
+    width: 100%;
+    padding: 8px; /* Reduce paddingul inputurilor */
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 13px; /* Diminuează dimensiunea fontului */
+    transition: all 0.3s;
+}
+
+/* Focalizare input */
+input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+    outline: none;
+}
+
+/* Buton */
+button {
+    margin-top: 15px; /* Micșorează spațiul de sus */
+    padding: 8px; /* Reduce paddingul butonului */
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px; /* Diminuează dimensiunea fontului */
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+/* Hover buton */
+button:hover {
+    background: #0056b3;
+}

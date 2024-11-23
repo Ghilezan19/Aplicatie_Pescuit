@@ -1,0 +1,26 @@
+<!-- add-participant.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adaugă Participant</title>
+</head>
+<body>
+<h1>Adaugă Participant</h1>
+<form action="/participants/save" method="POST">
+    <label for="name">Nume Participant:</label>
+    <input type="text" id="name" name="name" required><br><br>
+
+    <label for="competition">Alege Competiția:</label>
+    <select id="competition" name="competitionId">
+        <option value="">Selectează competiția</option>
+        <!-- Opțiuni dinamice vor fi încărcate din controller -->
+        <!-- Acestea vor fi populate de controllerul Spring -->
+        <option th:each="competition : ${competitions}" th:value="${competition.id}" th:text="${competition.name}"></option>
+    </select><br><br>
+
+    <button type="submit">Salvează Participant</button>
+</form>
+</body>
+</html>

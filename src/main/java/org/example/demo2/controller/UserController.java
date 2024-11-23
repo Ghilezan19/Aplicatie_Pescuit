@@ -1,4 +1,6 @@
+
 package org.example.demo2.controller;
+import org.example.demo2.service.UserService;
 
 import org.example.demo2.model.User;
 import org.example.demo2.service.UserService;
@@ -58,11 +60,12 @@ public class UserController {
     // Metoda pentru a gestiona cererea POST pentru înregistrare
     @PostMapping("/register")
     public String registerUser(User user) {
-        // Setează rolul utilizatorului la "ROLE_PARTICIPANT"
-        user.setRoles(Set.of("ROLE_PARTICIPANT"));
+        // Setează rolul utilizatorului la "PARTICIPANT"
+        user.setRoles(Set.of("PARTICIPANT"));
         // Salvează utilizatorul în baza de date
         userService.saveUser(user);
         // După înregistrare, redirecționează utilizatorul la pagina de login
         return "redirect:/login";
     }
+
 }

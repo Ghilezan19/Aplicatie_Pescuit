@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Adaugă Participant</title>
+</head>
+<body>
+<h1>Adaugă un Participant</h1>
+<form action="/participants/save?competitionId=${competitionId}" method="post">
+    <label for="name">Nume:</label>
+    <input type="text" id="name" name="name" required>
+    <button type="submit">Adaugă</button>
+</form>
+</body>
+</html>

@@ -10,14 +10,14 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
 @Configuration
 public class SecurityConfig {
 
-    @Autowired
-    @Lazy
-    private UserService userService;
+    private final UserService userService;
 
+    public SecurityConfig(UserService userService) {
+        this.userService = userService;
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -26,7 +26,8 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.disable()) // Disables CSRF protection
+        http.csrf(csrf -> csrf.disable()
+                )
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/tournaments/**").hasAnyRole("ORGANIZER", "PARTICIPANT")
                         .requestMatchers("/catches/**").hasRole("PARTICIPANT")
@@ -34,20 +35,19 @@ public class SecurityConfig {
                 )
                 .formLogin(form -> form
                         .defaultSuccessUrl("/dashboard", true)
+
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/")
+                        .logoutSuccessUrl("/home")
+
                 );
 
         return http.build();
     }
 
-
-
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(username -> userService.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("User not found")));
+        auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
     }
 }

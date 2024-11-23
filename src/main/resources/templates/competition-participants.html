@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Participanți</title>
+</head>
+<body>
+<h1>Participanți în competiția: ${competition.name}</h1>
+<ul>
+    <li th:each="participant : ${participants}">
+        <span th:text="${participant.name}"></span>
+    </li>
+</ul>
+<a href="/competitions">Înapoi la competiții</a>
+</body>
+</html>

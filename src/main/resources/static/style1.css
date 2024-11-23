@@ -1,0 +1,88 @@
+/* Stil pentru body, cu imagine de fundal și animație */
+body {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-image: url('lake1.jpg'); /* Calea către imagine */
+    background-size: cover;  /* Asigură-te că imaginea acoperă întregul ecran */
+    background-position: center center; /* Centrează imaginea */
+    background-attachment: fixed; /* Oferă un efect de parallax la scroll */
+    animation: moveBackground 30s linear infinite; /* Mișcare lentă a imaginii pe fundal */
+}
+
+/* Definim animația pentru mișcarea imaginii */
+@keyframes moveBackground {
+    0% {
+        background-position: 30% 30%;
+    }
+    100% {
+        background-position: 100% 100%;
+    }
+}
+
+/* Centrarea textului pe fundal */
+.container {
+    display: flex;
+    flex-direction: column; /* Aliniem textul și butoanele pe verticală */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    color: white; /* Asigură-te că textul este vizibil pe fundalul întunecat */
+    position: relative;
+    z-index: 1;
+}
+
+/* Stilizare pentru antetul textului */
+h1 {
+    font-size: 4em;
+    font-weight: bold;
+    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.8); /* Îmbunătățire umbră pentru lizibilitate */
+    margin-bottom: 40px; /* Adăugăm un spațiu între titlu și butoane */
+    font-family: 'Arial', sans-serif; /* Schimbă fontul pentru un aspect mai modern */
+    color: #FFD700; /* Culoare galbenă pentru text */
+}
+
+/* Stil pentru secțiunea de acțiuni */
+.actions {
+    background-color: rgba(0, 0, 0, 0.7); /* Fundal semitransparent pentru a îmbunătăți lizibilitatea textului */
+    padding: 20px 40px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.8);
+    margin-top: 20px;
+    border: 2px solid #FFD700; /* Adaugă o margine galbenă pentru un efect mai elegant */
+}
+
+/* Stil pentru butoane */
+.btn {
+    padding: 12px 24px;
+    margin: 10px;
+    background-color: #FFD700; /* Galben strălucitor */
+    color: #000;
+    font-size: 1.2em;
+    text-decoration: none;
+    border-radius: 8px; /* Colțuri mai rotunjite */
+    transition: all 0.3s ease;
+    border: 2px solid transparent; /* Adaugă bordură transparentă */
+    text-transform: uppercase; /* Face textul să fie în majuscule */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Adaugă umbra butoanelor */
+}
+
+.btn:hover {
+    background-color: #FF6347; /* Schimbă culoarea la hover */
+    color: white;
+    transform: translateY(-3px); /* Creează un efect de ridicare */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); /* Umbră mai intensă la hover */
+}
+
+/* Stiluri pentru footer sau linkuri */
+footer {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 0.9em;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}

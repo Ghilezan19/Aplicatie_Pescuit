@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competition Details</title>
+</head>
+<body>
+<h1 th:text="${competition.name}">Competition Name</h1>
+<h2>Participants</h2>
+<ul>
+    <li th:each="participant : ${competition.participants}" th:text="${participant.name}"></li>
+</ul>
+<a href="/dashboard">Back to Dashboard</a>
+</body>
+</html>
