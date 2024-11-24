@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Competitions</title>
-    <link rel="stylesheet" th:href="@{/style6.css}">
 </head>
 <body>
-<div class="container">
+<div>
     <h1>Competitions</h1>
-    <a href="/competitions/add" class="add-btn">Add New Competition</a>
-    <table>
+    <a href="/competitions/add">Add New Competition</a>
+    <table border="1" cellpadding="5" cellspacing="0">
         <thead>
         <tr>
             <th>Name</th>
@@ -24,14 +23,18 @@
         </thead>
         <tbody>
         <tr th:each="competition : ${competitions}">
-            <td th:text="${competition.name}"></td>
+            <td>
+                <a th:href="@{'/competitions/' + ${competition.id}}">
+                    <span th:text="${competition.name}"></span>
+                </a>
+            </td>
             <td th:text="${competition.location}"></td>
             <td th:text="${competition.date}"></td>
             <td th:text="${competition.sectors}"></td>
             <td th:text="${competition.participants}"></td>
             <td th:text="${competition.days}"></td>
             <td>
-                <a th:href="@{'/competitions/delete/' + ${competition.id}}" class="delete-btn">Delete</a>
+                <a th:href="@{'/competitions/delete/' + ${competition.id}}">Delete</a>
             </td>
         </tr>
         </tbody>

@@ -11,16 +11,18 @@
     <h1>Welcome, <span th:text="${username}"></span>!</h1>
     <p>Email: <span th:text="${email}"></span></p>
     <p>Roles: <span th:text="${roles}"></span></p> <!-- Afișează rolurile -->
+    <p th:text="${message}"></p>  <!-- Va afisa mesajul de succes -->
 
-    <!-- Butoane pentru acțiuni -->
     <div class="actions">
         <!-- Buton pentru adăugare competiție -->
         <a href="/competitions/add" class="btn btn-primary">Add Competition</a>
 
         <!-- Buton pentru adăugare participant -->
         <a href="/participants/add" class="btn btn-primary">Add Participant</a>
-    </div>
 
+        <!-- Buton pentru lista competițiilor -->
+        <a href="/competitions" class="btn btn-secondary">View Competitions</a>
+    </div>
     <a href="/logout" class="logout-btn">Logout</a>
 </div>
 </body>

@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 @Entity
 public class Competition {
 
@@ -90,7 +89,7 @@ public class Competition {
     }
 
     public Set<Participant> getParticipantsSet() {
-        return participantsSet;
+        return participantsSet; // Asigură-te că ai această metodă
     }
 
     public void setParticipantsSet(Set<Participant> participantsSet) {

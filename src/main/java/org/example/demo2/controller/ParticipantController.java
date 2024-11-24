@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 @Controller
 @RequestMapping("/participants")
 public class ParticipantController {
@@ -20,17 +19,23 @@ public class ParticipantController {
     private CompetitionService competitionService;
 
     @GetMapping("/add")
-    public String showAddParticipantForm(Model model) {
-        model.addAttribute("competitions", competitionService.getAllCompetitions());
+    public String showAddForm(Model model) {
         model.addAttribute("participant", new Participant());
-        return "add-participant";
+        model.addAttribute("competitions", competitionService.getAllCompetitions());
+        return "add-participant"; // Numele fișierului Thymeleaf
     }
 
-    @PostMapping("/add")
-    public String addParticipant(@ModelAttribute Participant participant, @RequestParam("competitionId") Long competitionId) {
+    @PostMapping("/save")
+    public String saveParticipant(@ModelAttribute Participant participant, @RequestParam("competitionId") Long competitionId, Model model) {
         Competition competition = competitionService.getCompetitionById(competitionId);
-        participant.getCompetitions().add(competition); // Asociem competiția cu participantul
+        participant.addCompetition(competition);
         participantService.saveParticipant(participant);
-        return "redirect:/dashboard"; // Redirecționare după salvare
+
+        // Adaugă un mesaj de succes
+        model.addAttribute("message", "Participantul a fost adăugat cu succes!");
+
+        return "redirect:/dashboard";  // Sau o altă pagină de vizualizare
     }
+
+
 }

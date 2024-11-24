@@ -35,6 +35,13 @@ public class CompetitionController {
         competitionService.saveCompetition(competition);
         return "redirect:/competitions";
     }
+    @GetMapping("/{id}")
+    public String viewCompetitionDetails(@PathVariable Long id, Model model) {
+        Competition competition = competitionService.getCompetitionById(id);
+        model.addAttribute("competition", competition);
+        model.addAttribute("participants", competition.getParticipantsSet());
+        return "competition-details"; // Numele fișierului Thymeleaf pentru detalii
+    }
 
     @GetMapping("/delete/{id}")
     public String deleteCompetition(@PathVariable Long id) {

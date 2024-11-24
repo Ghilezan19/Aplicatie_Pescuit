@@ -6,9 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.example.demo2.service.UserService;
-
-import java.util.List;
 
 @Controller
 public class DashboardController {
@@ -16,25 +13,29 @@ public class DashboardController {
     @GetMapping("/dashboard")
     public String showDashboard(Model model) {
         try {
-            // Obține utilizatorul autentificat
-            UserDetails currentUser = (UserDetails) SecurityContextHolder.getContext()
-                    .getAuthentication().getPrincipal();
+            // Obține utilizatorul autentificat din SecurityContext
+            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-            String username = currentUser.getUsername();
-            String email = currentUser.getUsername(); // Poți extrage email-ul dacă este același cu username-ul sau dintr-o altă sursă
+            // Verifică dacă principalul este un obiect UserDetails
+            if (principal instanceof UserDetails) {
+                UserDetails currentUser = (UserDetails) principal;
+                String username = currentUser.getUsername();
+                String email = currentUser.getUsername(); // Presupunem că email-ul este același cu username-ul
+                String roles = currentUser.getAuthorities().toString(); // Extragem rolurile
 
-            // Extrage rolurile utilizatorului
-            String roles = currentUser.getAuthorities().toString();  // Obține rolurile ca string
+                // Adaugă aceste informații în model
+                model.addAttribute("username", username);
+                model.addAttribute("email", email);
+                model.addAttribute("roles", roles);
+            } else {
+                // Dacă principalul nu este de tip UserDetails, lansează o excepție
+                throw new RuntimeException("Utilizatorul nu este autentificat corect");
+            }
 
-            // Adaugă datele utilizatorului în model
-            model.addAttribute("email", email);
-            model.addAttribute("username", username);
-            model.addAttribute("roles", roles);
-
-            return "dashboard";  // Vei avea acces la toate aceste date în dashboard.html
+            return "dashboard";  // Vei avea acces la aceste date în dashboard.html
         } catch (Exception e) {
             e.printStackTrace();
-            return "error";
+            return "error";  // Afișează o pagină de eroare în caz de problemă
         }
     }
 }

@@ -16,6 +16,7 @@ public class ParticipantService {
     }
 
     public void saveParticipant(Participant participant) {
-        participantRepository.save(participant);
+        participantRepository.save(participant);  // Salvează participantul, inclusiv relațiile many-to-many
     }
+
 }

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competition Details</title>
+    <link rel="stylesheet" th:href="@{/style1.css}">
+</head>
+<body>
+<h1 th:text="'Details for Competition: ' + ${competition.name}"></h1>
+<p><strong>Location:</strong> <span th:text="${competition.location}"></span></p>
+<p><strong>Date:</strong> <span th:text="${competition.date}"></span></p>
+<p><strong>Sectors:</strong> <span th:text="${competition.sectors}"></span></p>
+<h2>Participants</h2>
+<ul>
+    <!-- Afișează fiecare participant -->
+    <li th:each="participant : ${participants}" th:text="${participant.name}"></li>
+</ul>
+
+<a href="/competitions" class="btn">Back to Competitions</a>
+</body>
+</html>
