@@ -48,4 +48,13 @@ public class CompetitionController {
         competitionService.deleteCompetition(id);
         return "redirect:/competitions";
     }
+    @GetMapping("/details/{id}")
+    public String showCompetitionDetails(@PathVariable Long id, Model model) {
+        Competition competition = competitionService.getCompetitionById(id);
+        model.addAttribute("competition", competition);
+        model.addAttribute("participants", competition.getParticipants());
+        model.addAttribute("totalKg", competitionService.getTotalKgForCompetition(id)); // Kilograme totale
+        return "competition-details";
+    }
+
 }

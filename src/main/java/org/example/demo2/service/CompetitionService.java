@@ -1,4 +1,5 @@
 package org.example.demo2.service;
+import org.example.demo2.model.Participant;
 
 import org.example.demo2.model.Competition;
 import org.example.demo2.repository.CompetitionRepository;
@@ -36,4 +37,12 @@ public class CompetitionService {
     public void deleteCompetition(Long id) {
         competitionRepository.deleteById(id);
     }
+    public double getTotalKgForCompetition(Long competitionId) {
+        Competition competition = getCompetitionById(competitionId);
+        return competition.getParticipantsSet() // Folosim participantsSet, care este o colecție
+                .stream()
+                .mapToDouble(Participant::getKg)
+                .sum();
+    }
+
 }

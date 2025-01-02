@@ -95,4 +95,5 @@ public class Competition {
     public void setParticipantsSet(Set<Participant> participantsSet) {
         this.participantsSet = participantsSet;
     }
+
 }

@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
+
 @Controller
 @RequestMapping("/participants")
 public class ParticipantController {
@@ -36,6 +39,17 @@ public class ParticipantController {
 
         return "redirect:/dashboard";  // Sau o altă pagină de vizualizare
     }
+    @PostMapping("/addKg/{id}")
+    @ResponseBody
+    public String addKg(@PathVariable Long id, @RequestBody Map<String, String> payload) {
+        double newKg = Double.parseDouble(payload.get("kg"));
+        Participant participant = participantService.getParticipantById(id);
+        participant.setKg(participant.getKg() + newKg); // Adaugă kilogramele noi la cele existente
+        participantService.saveParticipant(participant);
+        return "Kilogramele au fost adăugate cu succes!";
+    }
+
+
 
 
 }

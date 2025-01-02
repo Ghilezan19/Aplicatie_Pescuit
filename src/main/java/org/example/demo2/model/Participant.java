@@ -10,8 +10,9 @@ public class Participant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private double kg;
     private String name;
+
 
     // Relație Many-to-Many cu Competition
     @ManyToMany
@@ -52,4 +53,13 @@ public class Participant {
     public void setName(String name) {
         this.name = name;
     }
+    public double getKg() {
+        return kg;
+    }
+
+    public void setKg(double kg) {
+        this.kg = kg;
+    }
+
+
 }

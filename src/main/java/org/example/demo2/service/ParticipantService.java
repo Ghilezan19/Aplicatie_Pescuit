@@ -18,5 +18,8 @@ public class ParticipantService {
     public void saveParticipant(Participant participant) {
         participantRepository.save(participant);  // Salvează participantul, inclusiv relațiile many-to-many
     }
+    public Participant getParticipantById(Long id) {
+        return participantRepository.findById(id).orElseThrow(() -> new RuntimeException("Participant not found"));
+    }
 
 }
