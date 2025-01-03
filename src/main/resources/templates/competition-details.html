@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Competition Details</title>
+    <title>Detalii Competitie</title>
     <style>
         body {
+
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -33,16 +34,16 @@
         }
 
         th {
-            background-color: #f4f4f4;
+            background-color: #45d851;
             font-weight: bold;
         }
 
         tr:nth-child(even) {
-            background-color: #f9f9f9;
+            background-color: #ffffff;
         }
 
         tr:hover {
-            background-color: #f1f1f1;
+            background-color: #70e1ff;
         }
 
         .table-container {
@@ -73,40 +74,43 @@
 </head>
 <body>
 <div class="table-container">
-    <h2>Participants</h2>
+    <h2>Participanti</h2>
     <table>
         <thead>
         <tr>
-            <th>Name</th>
-            <th>Weight (kg)</th>
-            <th>Add Weight</th>
+            <th>Clasament</th>
+            <th>Nume</th>
+            <th>KG</th>
+            <th>Adauga KG</th>
         </tr>
         </thead>
         <tbody>
         <!-- Iterăm prin participanți -->
-        <tr th:each="participant : ${participants}">
+        <tr th:each="participant, iterStat : ${participants}">
+            <td th:text="${iterStat.index + 1}"></td> <!-- Afișăm locul -->
             <td th:text="${participant.name}"></td>
             <td th:text="${participant.kg}"></td>
             <td>
-                <input type="number" name="kg" min="0" step="0.1" placeholder="Add kg" th:id="'kg-' + ${participant.id}">
-                <button th:onclick="'addKg(' + ${participant.id} + ')'" class="btn">Add</button>
+                <input type="number" name="kg" min="0" step="0.1" placeholder="KG..." th:id="'kg-' + ${participant.id}">
+                <button th:onclick="'addKg(' + ${participant.id} + ')'" class="btn">Adauga</button>
             </td>
         </tr>
         </tbody>
     </table>
+
 </div>
 <div class="details">
-    <h1 th:text="'Competition: ' + ${competition.name}"></h1>
-    <p><strong>Location:</strong> <span th:text="${competition.location}"></span></p>
-    <p><strong>Date:</strong> <span th:text="${competition.date}"></span></p>
-    <p><strong>Sectors:</strong> <span th:text="${competition.sectors}"></span></p>
+    <h1 th:text="'Competitie: ' + ${competition.name}"></h1>
+    <p><strong>Locatie:</strong> <span th:text="${competition.location}"></span></p>
+    <p><strong>Data:</strong> <span th:text="${competition.date}"></span></p>
+    <p><strong>Sectoare:</strong> <span th:text="${competition.sectors}"></span></p>
 
 
     <!-- Afișează greutatea totală -->
-    <p><strong>Total Weight:</strong> <span th:text="${competition.totalKg} + ' kg'"></span></p>
+    <p><strong>Greutate Totala:</strong> <span th:text="${competition.totalKg} + ' kg'"></span></p>
 
     <!-- Buton pentru recalculare manuală -->
-    <a href="/competitions" class="btn">Back to Competitions</a>
+    <a href="/competitions" class="btn">Inapoi la competitii</a>
 </div>
 
 <script>

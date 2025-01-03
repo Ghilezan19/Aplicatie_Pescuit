@@ -12,7 +12,7 @@ public class Participant {
     private Long id;
     private double kg;
     private String name;
-
+    private int points;
 
     // Relație Many-to-Many cu Competition
     @ManyToMany
