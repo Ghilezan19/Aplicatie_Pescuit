@@ -61,10 +61,9 @@ public class CompetitionController {
     @GetMapping("/details/{id}")
     public String showCompetitionDetails(@PathVariable Long id, Model model) {
         Competition competition = competitionService.getCompetitionById(id);
-        double totalKg = competitionService.getTotalKgForCompetition(id); // Calculează totalul
         model.addAttribute("competition", competition);
         model.addAttribute("participants", competition.getParticipants());
-        model.addAttribute("totalKg", totalKg); // Adaugă greutatea totală în model
+        model.addAttribute("totalKg", competition.getTotalKg()); // Adaugă greutatea totală în model
         return "competition-details";
     }
 

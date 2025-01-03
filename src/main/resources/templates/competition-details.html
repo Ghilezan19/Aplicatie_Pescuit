@@ -101,12 +101,11 @@
     <p><strong>Date:</strong> <span th:text="${competition.date}"></span></p>
     <p><strong>Sectors:</strong> <span th:text="${competition.sectors}"></span></p>
 
+
     <!-- Afișează greutatea totală -->
     <p><strong>Total Weight:</strong> <span th:text="${competition.totalKg} + ' kg'"></span></p>
 
     <!-- Buton pentru recalculare manuală -->
-    <a th:href="@{/competitions/recalculate/{id}(id=${competition.id})}" class="btn">Recalculate Total Weight</a>
-
     <a href="/competitions" class="btn">Back to Competitions</a>
 </div>
 

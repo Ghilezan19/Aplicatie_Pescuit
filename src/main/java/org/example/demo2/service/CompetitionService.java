@@ -28,7 +28,10 @@ public class CompetitionService {
     }
 
     public Competition getCompetitionById(Long id) {
-        return competitionRepository.findById(id).orElseThrow(() -> new RuntimeException("Competition not found"));
+        Competition competition = competitionRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Competition not found"));
+        competition.updateTotalKg(); // Recalculează greutatea totală
+        return competition;
     }
 
     public void deleteCompetition(Long id) {
