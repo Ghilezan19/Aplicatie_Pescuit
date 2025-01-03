@@ -9,7 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/participants")
@@ -46,7 +50,24 @@ public class ParticipantController {
         Participant participant = participantService.getParticipantById(id);
         participant.setKg(participant.getKg() + newKg); // Adaugă kilogramele noi la cele existente
         participantService.saveParticipant(participant);
+
         return "Kilogramele au fost adăugate cu succes!";
+    }
+    @GetMapping("/details/{competitionId}")
+    public String showCompetitionDetails(@PathVariable Long competitionId, Model model) {
+        Competition competition = competitionService.getCompetitionById(competitionId);
+
+        // Convertim participanții într-o listă și sortăm după kg
+        List<Participant> sortedParticipants = competition.getParticipants()
+                .stream()
+                .sorted(Comparator.comparingDouble(Participant::getKg).reversed()) // Sortare descrescătoare
+                .toList();
+
+        model.addAttribute("competition", competition);
+        model.addAttribute("participants", sortedParticipants);
+        model.addAttribute("totalKg", sortedParticipants.stream().mapToDouble(Participant::getKg).sum());
+
+        return "competition-details";
     }
 
 

@@ -2,6 +2,7 @@ package org.example.demo2.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -17,10 +18,11 @@ public class Competition {
     private LocalDate date;
 
     private Integer sectors;
-    private Integer participants;
+    private Integer totalParticipants; // Redenumit pentru claritate
 
     @ElementCollection
     private List<String> days; // Ziua 1, Ziua 2, etc.
+    private double totalKg; // Noul câmp pentru greutatea totală
 
     // Relație many-to-many cu Participant
     @ManyToMany
@@ -29,7 +31,7 @@ public class Competition {
             joinColumns = @JoinColumn(name = "competition_id"),
             inverseJoinColumns = @JoinColumn(name = "participant_id")
     )
-    private Set<Participant> participantsSet = new HashSet<>();  // Corect: Set<Participant>
+    private List<Participant> participants;
 
     // Getters și Setters
     public Long getId() {
@@ -72,12 +74,12 @@ public class Competition {
         this.sectors = sectors;
     }
 
-    public Integer getParticipants() {
-        return participants;
+    public Integer getTotalParticipants() {
+        return totalParticipants;
     }
 
-    public void setParticipants(Integer participants) {
-        this.participants = participants;
+    public void setTotalParticipants(Integer totalParticipants) {
+        this.totalParticipants = totalParticipants;
     }
 
     public List<String> getDays() {
@@ -88,12 +90,24 @@ public class Competition {
         this.days = days;
     }
 
-    public Set<Participant> getParticipantsSet() {
-        return participantsSet; // Asigură-te că ai această metodă
+    public List<Participant> getParticipants() {
+        return participants;
     }
 
-    public void setParticipantsSet(Set<Participant> participantsSet) {
-        this.participantsSet = participantsSet;
+    public void setParticipants(List<Participant> participants) {
+        this.participants = participants;
+    }
+    public double getTotalKg() {
+        return totalKg;
     }
 
+    public void setTotalKg(double totalKg) {
+        this.totalKg = totalKg;
+    }
+
+    public void updateTotalKg() {
+        this.totalKg = participants.stream()
+                .mapToDouble(Participant::getKg)
+                .sum();
+    }
 }

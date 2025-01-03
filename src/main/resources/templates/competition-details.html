@@ -3,39 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Competition Details</title>
-    <link rel="stylesheet" th:href="@{/style1.css}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        h1 {
+            margin: 20px;
+        }
+
+        .details {
+            padding: 20px;
+            flex: 1;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .table-container {
+            flex: 0 0 30%;
+            max-height: 90vh; /* Table height fixed for scrolling */
+            overflow-y: auto;
+            border-right: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        input[type="number"] {
+            width: 60px;
+        }
+    </style>
 </head>
 <body>
-<h1 th:text="'Details for Competition: ' + ${competition.name}"></h1>
-<p><strong>Location:</strong> <span th:text="${competition.location}"></span></p>
-<p><strong>Date:</strong> <span th:text="${competition.date}"></span></p>
-<p><strong>Sectors:</strong> <span th:text="${competition.sectors}"></span></p>
+<div class="table-container">
+    <h2>Participants</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Weight (kg)</th>
+            <th>Add Weight</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Iterăm prin participanți -->
+        <tr th:each="participant : ${participants}">
+            <td th:text="${participant.name}"></td>
+            <td th:text="${participant.kg}"></td>
+            <td>
+                <input type="number" name="kg" min="0" step="0.1" placeholder="Add kg" th:id="'kg-' + ${participant.id}">
+                <button th:onclick="'addKg(' + ${participant.id} + ')'" class="btn">Add</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="details">
+    <h1 th:text="'Competition: ' + ${competition.name}"></h1>
+    <p><strong>Location:</strong> <span th:text="${competition.location}"></span></p>
+    <p><strong>Date:</strong> <span th:text="${competition.date}"></span></p>
+    <p><strong>Sectors:</strong> <span th:text="${competition.sectors}"></span></p>
 
-<!-- Afișăm kilogramele totale ale competiției -->
-<p><strong>Total Kilograms in Competition:</strong> <span th:text="${totalKg}"></span></p>
+    <!-- Afișează greutatea totală -->
+    <p><strong>Total Weight:</strong> <span th:text="${competition.totalKg} + ' kg'"></span></p>
 
-<h2>Participants</h2>
-<ul>
-    <!-- Iterăm prin fiecare participant -->
-    <li th:each="participant : ${participants}">
-        <span th:text="${participant.name}"></span> -
-        <strong>Total kg:</strong> <span id="total-kg-[[${participant.id}]]" th:text="${participant.kg}">0</span> kg
-        <!-- Casetă pentru introducerea kilogramelor -->
-        <input type="number" name="kg" min="0" step="0.1" placeholder="Adaugă kg" th:id="'kg-' + ${participant.id}">
-        <!-- Buton pentru a adăuga kilograme -->
-        <button th:onclick="'addKg(' + ${participant.id} + ')'" class="btn" style="padding: 5px 10px; font-size: 12px;">Adaugă kg</button>
-    </li>
-</ul>
+    <!-- Buton pentru recalculare manuală -->
+    <a th:href="@{/competitions/recalculate/{id}(id=${competition.id})}" class="btn">Recalculate Total Weight</a>
 
-<a href="/competitions" class="btn">Back to Competitions</a>
+    <a href="/competitions" class="btn">Back to Competitions</a>
+</div>
+
 <script>
     function addKg(participantId) {
         const kgInput = document.getElementById('kg-' + participantId);
         const kgValue = parseFloat(kgInput.value);
 
         if (isNaN(kgValue) || kgValue <= 0) {
-            alert('Te rog introdu o valoare validă!');
+            alert('Please enter a valid weight!');
             return;
         }
 
@@ -47,14 +128,13 @@
             body: JSON.stringify({ kg: kgValue })
         }).then(response => {
             if (response.ok) {
-                // Reîncărcare completă a paginii
-                window.location.reload();
+                location.reload();
             } else {
-                alert("A apărut o eroare la procesarea cererii.");
+                alert("An error occurred while processing the request.");
             }
         }).catch(error => {
-            console.error("Eroare de comunicare cu serverul:", error);
-            alert("A apărut o eroare de comunicare cu serverul.");
+            console.error("Server communication error:", error);
+            alert("A communication error occurred.");
         });
     }
 </script>

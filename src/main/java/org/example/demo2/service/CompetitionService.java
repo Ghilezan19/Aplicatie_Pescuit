@@ -6,7 +6,7 @@ import org.example.demo2.repository.CompetitionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
 
 @Service
 public class CompetitionService {
@@ -23,10 +23,7 @@ public class CompetitionService {
     }
 
     public Competition saveCompetition(Competition competition) {
-        // Loghează competiția care urmează să fie salvată
-        System.out.println("Saving competition: " + competition);
-
-        // Salvează competiția în baza de date
+        competition.updateTotalKg(); // Recalculează greutatea totală
         return competitionRepository.save(competition);
     }
 
@@ -38,11 +35,29 @@ public class CompetitionService {
         competitionRepository.deleteById(id);
     }
     public double getTotalKgForCompetition(Long competitionId) {
-        Competition competition = getCompetitionById(competitionId);
-        return competition.getParticipantsSet() // Folosim participantsSet, care este o colecție
-                .stream()
+        Competition competition = competitionRepository.findById(competitionId)
+                .orElseThrow(() -> new IllegalArgumentException("Competition not found"));
+
+        return competition.getParticipants().stream()
                 .mapToDouble(Participant::getKg)
                 .sum();
+    }
+
+    public Competition getCompetitionWithSortedParticipantsByKg(Long id) {
+        Competition competition = competitionRepository.findById(id).orElseThrow(() -> new RuntimeException("Competition not found"));
+
+        // Sortează participanții în serviciu
+        competition.getParticipants().sort(Comparator.comparing(Participant::getKg).reversed());
+
+        return competition;
+    }
+
+    public void updateTotalKg(Long competitionId) {
+        Competition competition = competitionRepository.findById(competitionId)
+                .orElseThrow(() -> new IllegalArgumentException("Competition not found"));
+
+        competition.updateTotalKg(); // Recalculează greutatea totală
+        competitionRepository.save(competition);
     }
 
 }

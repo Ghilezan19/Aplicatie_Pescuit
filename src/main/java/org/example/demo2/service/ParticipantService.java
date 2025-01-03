@@ -5,6 +5,8 @@ import org.example.demo2.repository.ParticipantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ParticipantService {
 
@@ -20,6 +22,9 @@ public class ParticipantService {
     }
     public Participant getParticipantById(Long id) {
         return participantRepository.findById(id).orElseThrow(() -> new RuntimeException("Participant not found"));
+    }
+    public List<Participant> getAllParticipants() {
+        return participantRepository.findAll();
     }
 
 }
