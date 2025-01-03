@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Set;
 
@@ -59,13 +60,22 @@ public class UserController {
 
     // Metoda pentru a gestiona cererea POST pentru înregistrare
     @PostMapping("/register")
-    public String registerUser(User user) {
-        // Setează rolul utilizatorului la "PARTICIPANT"
-        user.setRoles(Set.of("PARTICIPANT"));
-        // Salvează utilizatorul în baza de date
+    public String registerUser(User user, @RequestParam String role, @RequestParam(required = false) String organizerKey) {
+        if ("ORGANIZER".equals(role)) {
+            if (!"19022003".equals(organizerKey)) {
+                // Dacă parola specială este incorectă, redirecționăm utilizatorul înapoi la formular
+                return "redirect:/register?error=invalid_organizer_key";
+            }
+        }
+
+        // Setăm rolul utilizatorului
+        user.setRoles(Set.of(role));
+        // Salvăm utilizatorul în baza de date
         userService.saveUser(user);
-        // După înregistrare, redirecționează utilizatorul la pagina de login
+
+        // Redirecționăm utilizatorul la pagina de login
         return "redirect:/login";
     }
+
 
 }

@@ -24,23 +24,30 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.disable()
-                )
+        http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/tournaments/**").hasAnyRole("ORGANIZER", "PARTICIPANT")
-                        .requestMatchers("/catches/**").hasRole("PARTICIPANT")
+                        // Permite accesul la resurse statice pentru toți utilizatorii
+                        .requestMatchers("/css/**", "/js/**", "/images/**", "/webjars/**").permitAll()
+                        // Restricții pentru utilizatori autentificați
+                        .requestMatchers("/dashboard/**").hasAnyAuthority("PARTICIPANT", "ORGANIZER")
+                        .requestMatchers("/competitions/add").hasAuthority("ORGANIZER") // Doar ORGANIZER poate accesa
+                        .requestMatchers("/competitions").hasAnyAuthority("ORGANIZER","PARTICIPANT") // Acces la lista competițiilor
+                        .requestMatchers("/competitions/*").hasAnyAuthority("ORGANIZER","PARTICIPANT") // Acces la detaliile competiției
+                        .requestMatchers("/competitions/**").hasAuthority("ORGANIZER") // Sub-rute doar pentru ORGANIZER
+                        .requestMatchers("/participants/add").hasAuthority("ORGANIZER") // Numai ORGANIZER poate accesa
+                        // Alte resurse publice
                         .anyRequest().permitAll()
                 )
                 .formLogin(form -> form
-                        .defaultSuccessUrl("/dashboard", true)
-
+                        .defaultSuccessUrl("/dashboard", true) // Redirecționează mereu la /dashboard după logare
+                        .permitAll() // Permite accesul la pagina implicită de login
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/home")
-
                 );
 
         return http.build();
@@ -50,4 +57,5 @@ public class SecurityConfig {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
     }
+
 }
