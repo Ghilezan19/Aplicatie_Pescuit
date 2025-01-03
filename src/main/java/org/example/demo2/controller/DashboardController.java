@@ -2,7 +2,6 @@ package org.example.demo2.controller;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +15,6 @@ public class DashboardController {
             // Obține utilizatorul autentificat din SecurityContext
             Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-            // Verifică dacă principalul este un obiect UserDetails
             if (principal instanceof UserDetails) {
                 UserDetails currentUser = (UserDetails) principal;
                 String username = currentUser.getUsername();
@@ -27,15 +25,21 @@ public class DashboardController {
                 model.addAttribute("username", username);
                 model.addAttribute("email", email);
                 model.addAttribute("roles", roles);
+
+                // Verifică rolurile utilizatorului și redirecționează către pagina corespunzătoare
+                if (roles.contains("PARTICIPANT")) {
+                    return "participant_dashboard"; // Pagina pentru participant
+                } else if (roles.contains("ORGANIZER")) {
+                    return "organizator_dashboard"; // Pagina pentru organizator
+                } else {
+                    return "access-denied"; // Pagina pentru acces interzis
+                }
             } else {
-                // Dacă principalul nu este de tip UserDetails, lansează o excepție
                 throw new RuntimeException("Utilizatorul nu este autentificat corect");
             }
-
-            return "dashboard";  // Vei avea acces la aceste date în dashboard.html
         } catch (Exception e) {
             e.printStackTrace();
-            return "error";  // Afișează o pagină de eroare în caz de problemă
+            return "error"; // Afișează o pagină de eroare în caz de problemă
         }
     }
 }

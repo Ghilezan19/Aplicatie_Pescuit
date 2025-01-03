@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina de pornire</title>
+    <link rel="stylesheet" th:href="@{/style1.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Bine ai venit, <span th:text="${username}"></span>!</h1>
+    <p>Rol: <span th:text="${roles}" class="role-text"></span></p>
+
+    <p th:text="${message}"></p>  <!-- Va afisa mesajul de succes -->
+
+    <div class="actions">
+        <!-- Buton pentru lista competițiilor -->
+        <a href="/competitions" class="btn btn-secondary">Vizualizare Competitii</a>
+    </div>
+    <a href="/logout" class="logout-btn">Iesire Cont</a>
+</div>
+</body>
+</html>

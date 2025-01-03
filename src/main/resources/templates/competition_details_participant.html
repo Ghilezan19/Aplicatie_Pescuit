@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Detalii Competitie</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        h1 {
+            margin: 20px;
+        }
+
+        .details {
+            padding: 20px;
+            flex: 1;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #45d851;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #ffffff;
+        }
+
+        tr:hover {
+            background-color: #70e1ff;
+        }
+
+        .table-container {
+            flex: 0 0 30%;
+            max-height: 90vh; /* Table height fixed for scrolling */
+            overflow-y: auto;
+            border-right: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<div class="table-container">
+    <h2>Participanti</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Clasament</th>
+            <th>Nume</th>
+            <th>KG</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Iterăm prin participanți -->
+        <tr th:each="participant, iterStat : ${participants}">
+            <td th:text="${iterStat.index + 1}"></td> <!-- Afișăm locul -->
+            <td th:text="${participant.name}"></td>
+            <td th:text="${participant.kg}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="details">
+    <h1 th:text="'Competitie: ' + ${competition.name}"></h1>
+    <p><strong>Locatie:</strong> <span th:text="${competition.location}"></span></p>
+    <p><strong>Data:</strong> <span th:text="${competition.date}"></span></p>
+    <p><strong>Sectoare:</strong> <span th:text="${competition.sectors}"></span></p>
+
+    <!-- Afișează greutatea totală -->
+    <p><strong>Greutate Totala:</strong> <span th:text="${competition.totalKg} + ' kg'"></span></p>
+
+    <!-- Buton pentru recalculare manuală -->
+    <a href="/competitions" class="btn">Inapoi la competitii</a>
+</div>
+</body>
+</html>

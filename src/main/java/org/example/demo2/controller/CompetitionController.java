@@ -4,6 +4,10 @@ import org.example.demo2.model.Competition;
 import org.example.demo2.model.Participant;
 import org.example.demo2.service.CompetitionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -49,9 +53,27 @@ public class CompetitionController {
 
         model.addAttribute("competition", competition);
         model.addAttribute("participants", competition.getParticipants());
-        return "competition-details";
-    }
 
+        // Obține utilizatorul autentificat
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UserDetails) {
+            UserDetails currentUser = (UserDetails) principal;
+            String roles = currentUser.getAuthorities().toString();
+
+            // Verifică rolurile utilizatorului
+            if (roles.contains("PARTICIPANT")) {
+                return "competition_details_participant"; // Pagina pentru participant
+            } else if (roles.contains("ORGANIZER")) {
+                return "competition_details_organizer"; // Pagina pentru organizator
+            } else {
+                return "access-denied"; // Pagina pentru acces interzis
+            }
+        } else {
+            // Dacă principalul nu este de tip UserDetails, lansează o excepție sau redirecționează la o pagină de eroare
+            return "error";
+        }
+    }
 
     @GetMapping("/delete/{id}")
     public String deleteCompetition(@PathVariable Long id) {
