@@ -2,17 +2,15 @@ package org.example.demo2.controller;
 
 import org.example.demo2.model.Competition;
 import org.example.demo2.model.Participant;
+import org.example.demo2.repository.CompetitionRepository;
 import org.example.demo2.service.CompetitionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -21,10 +19,24 @@ import java.util.List;
 public class CompetitionController {
 
     private final CompetitionService competitionService;
+    private final CompetitionRepository competitionRepository;
 
     @Autowired
-    public CompetitionController(CompetitionService competitionService) {
+    public CompetitionController(CompetitionService competitionService, CompetitionRepository competitionRepository) {
         this.competitionService = competitionService;
+        this.competitionRepository = competitionRepository;
+    }
+
+    @GetMapping("/competitions")
+    public String getCompetitions(Model model) {
+        List<Competition> competitions = competitionRepository.findAllByOrderByDateAsc();
+
+        // Log pentru verificare
+        System.out.println("Competitions sorted by date:");
+        competitions.forEach(c -> System.out.println(c.getName() + " - " + c.getDate()));
+
+        model.addAttribute("competitions", competitions);
+        return "competitions";
     }
 
     @GetMapping
@@ -44,6 +56,7 @@ public class CompetitionController {
         competitionService.saveCompetition(competition);
         return "redirect:/competitions";
     }
+
     @GetMapping("/{id}")
     public String viewCompetitionDetails(@PathVariable Long id, Model model) {
         Competition competition = competitionService.getCompetitionById(id);
@@ -80,6 +93,7 @@ public class CompetitionController {
         competitionService.deleteCompetition(id);
         return "redirect:/competitions";
     }
+
     @GetMapping("/details/{id}")
     public String showCompetitionDetails(@PathVariable Long id, Model model) {
         Competition competition = competitionService.getCompetitionById(id);
@@ -88,7 +102,6 @@ public class CompetitionController {
         model.addAttribute("totalKg", competition.getTotalKg()); // Adaugă greutatea totală în model
         return "competition-details";
     }
-
 
     @GetMapping("/sorted/{id}")
     public String getSortedParticipants(@PathVariable Long id, Model model) {
@@ -104,5 +117,4 @@ public class CompetitionController {
         competitionService.updateTotalKg(id); // Recalculează greutatea totală
         return "redirect:/competitions/" + id;
     }
-
 }

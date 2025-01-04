@@ -1,102 +1,136 @@
-/* Fundalul paginii */
 body {
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
-    background-image: url('lake1.jpg'); /* Calea către imagine */
-    background-size: cover; /* Imaginea acoperă întregul ecran */
-    background-position: center center; /* Centrează imaginea */
-    background-attachment: fixed; /* Creează efectul de parallax */
-    animation: moveBackground 30s linear infinite; /* Mișcare lentă a imaginii */
     display: flex;
-    justify-content: flex-start; /* Aliniază containerul la stânga */
-    align-items: flex-start; /* Aliniază vertical în stânga */
-    height: 100vh; /* Înălțimea paginii */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url('lake5.jpg') no-repeat center center fixed; /* Imaginea de fundal */
+    background-size: cover;
+    position: relative;
 }
 
-/* Animația pentru fundal */
-@keyframes moveBackground {
-    0% {
-        background-position: 30% 30%;
-    }
-    100% {
-        background-position: 100% 100%;
-    }
-}
-
-/* Containerul formularului */
-.form-container {
-    background: rgb(135, 204, 139); /* Fundal alb semi-transparent */
-    border-radius: 10px;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* Umbra containerului */
-    padding: 20px; /* Reduce paddingul pentru a micșora dimensiunea formularului */
+/* Suprapunere întunecată peste imagine pentru contrast */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    max-width: 350px; /* Redu dimensiunea maximă a formularului */
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Suprapunere neagră cu transparență */
+    z-index: 0;
+}
+
+.form-container {
+    position: relative;
+    z-index: 1; /* Deasupra suprapunerii */
+    background: rgba(30, 30, 30, 0.9); /* Fundal semi-transparent */
+    border: 2px solid #d4af37; /* Auriu pentru margini */
+    border-radius: 15px;
+    padding: 1.5rem;
+    width: 90%;
+    max-width: 350px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8); /* Efect premium */
     text-align: center;
-    margin: 0; /* Elimină spațiul de sus și jos */
 }
 
-/* Titlu */
-h1 {
-    font-size: 20px; /* Reduce dimensiunea titlului */
-    margin-bottom: 15px; /* Micșorează spațiul sub titlu */
-    color: #007bff;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); /* Umbră pentru lizibilitate */
+.form-container h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #d4af37;
+    margin-bottom: 1rem;
 }
 
-/* Formă generală */
-form {
-    display: flex;
-    flex-direction: column;
-}
-
-/* Grupuri de input */
-.form-group {
-    margin-bottom: 12px; /* Micșorează spațiul dintre grupuri */
-    text-align: left;
-}
-
-/* Etichete */
 label {
     display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #495057;
+    margin: 0.6rem 0 0.3rem;
+    font-size: 14px;
+    text-align: left;
+    color: #ccc;
 }
 
-/* Inputuri */
-input {
+input, select, button {
     width: 100%;
-    padding: 8px; /* Reduce paddingul inputurilor */
-    border: 1px solid #ced4da;
+    padding: 0.6rem;
+    margin-bottom: 0.8rem;
+    border: 1px solid #444;
     border-radius: 5px;
-    font-size: 13px; /* Diminuează dimensiunea fontului */
-    transition: all 0.3s;
+    font-size: 13px;
 }
 
-/* Focalizare input */
-input:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+input, select {
+    background: #222;
+    color: #fff;
+}
+
+input:focus, select:focus {
     outline: none;
+    box-shadow: 0 0 5px #d4af37;
 }
 
-/* Buton */
 button {
-    margin-top: 15px; /* Micșorează spațiul de sus */
-    padding: 8px; /* Reduce paddingul butonului */
-    background: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 14px; /* Diminuează dimensiunea fontului */
+    background: #d4af37;
+    color: #121212;
     font-weight: bold;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: all 0.3s ease;
 }
 
-/* Hover buton */
 button:hover {
-    background: #0056b3;
+    background: #f1c40f;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(212, 175, 55, 0.6);
+}
+
+.error-message {
+    color: #e74c3c;
+    font-size: 14px;
+    margin-top: -0.5rem;
+    margin-bottom: 1rem;
+}
+
+#organizer-password {
+    display: none;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+#organizer-password label {
+    margin-top: 0.8rem;
+}
+
+.form-container {
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 500px) {
+    .form-container {
+        padding: 1rem;
+        border-radius: 10px;
+    }
+
+    input, select, button {
+        font-size: 12px;
+        padding: 0.5rem;
+    }
+
+    label {
+        font-size: 12px;
+    }
+
+    .form-container h2 {
+        font-size: 20px;
+    }
 }

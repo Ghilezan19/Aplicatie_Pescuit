@@ -1,36 +1,41 @@
-<form action="/register" method="post">
-    <label for="username">Nume:</label>
-    <input type="text" id="username" name="username" required />
-    <br/>
-    <label for="password">Parola:</label>
-    <input type="password" id="password" name="password" required />
-    <br/>
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required />
-    <br/>
-    <label for="role">Tip cont:</label>
-    <select id="role" name="role" required onchange="toggleOrganizerPassword(this.value)">
-        <option value="PARTICIPANT">Participant</option>
-        <option value="ORGANIZER">Organizator</option>
-    </select>
-    <br/>
-    <div id="organizer-password" style="display: none;">
-        <label for="organizerKey">Parola specială pentru organizator:</label>
-        <input type="password" id="organizerKey" name="organizerKey" />
-    </div>
-    <br/>
-    <button type="submit" class="btn">Creeaza contul</button>
-    <div class="form-container">
-        <h2>Creeaza un cont nou</h2>
-        <form action="/register" method="post">
-            <!-- Form fields here -->
-        </form>
-        <div th:if="${param.error}" class="error-message">
-            <p th:text="'Eroare: ' + ${param.error}"></p>
-        </div>
-    </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creare Cont Premium</title>
+    <link rel="stylesheet" href="style3.css"> <!-- Link către fișierul CSS -->
+</head>
+<body>
+<div class="form-container">
+    <h2>Creează un Cont Nou</h2>
+    <form action="/register" method="post">
+        <label for="username">Nume:</label>
+        <input type="text" id="username" name="username" placeholder="Introdu numele" required />
 
-</form>
+        <label for="password">Parolă:</label>
+        <input type="password" id="password" name="password" placeholder="Introdu parola" required />
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="Introdu email-ul" required />
+
+        <label for="role">Tip cont:</label>
+        <select id="role" name="role" required onchange="toggleOrganizerPassword(this.value)">
+            <option value="PARTICIPANT">Participant</option>
+            <option value="ORGANIZER">Organizator</option>
+        </select>
+
+        <div id="organizer-password">
+            <label for="organizerKey">Parolă specială pentru organizator:</label>
+            <input type="password" id="organizerKey" name="organizerKey" placeholder="Introdu parola specială" />
+        </div>
+
+        <button type="submit">Creează contul</button>
+    </form>
+    <div class="error-message" th:if="${param.error}">
+        <p th:text="'Eroare: ' + ${param.error}"></p>
+    </div>
+</div>
 
 <script>
     function toggleOrganizerPassword(role) {
@@ -42,3 +47,5 @@
         }
     }
 </script>
+</body>
+</html>

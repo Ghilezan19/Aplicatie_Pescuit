@@ -1,104 +1,95 @@
-/* Fundalul paginii */
+/* Stil pentru fundal */
 body {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
     font-family: 'Arial', sans-serif;
-    background-image: url('lake1.jpg'); /* Calea către imagine */
-    background-size: cover; /* Imaginea acoperă întregul ecran */
-    background-position: center center; /* Centrează imaginea */
-    background-attachment: fixed; /* Creează efectul de parallax */
-    animation: moveBackground 30s linear infinite; /* Mișcare lentă a imaginii */
+    height: 100vh;
+    background: url('img.jpg') no-repeat center center fixed; /* Imaginea de fundal */
+    background-size: cover;
     display: flex;
-    justify-content: flex-start; /* Aliniază containerul la stânga */
-    align-items: flex-start; /* Aliniază vertical în stânga */
-    height: 100vh; /* Înălțimea paginii */
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    color: #fff;
 }
 
-/* Animația pentru fundal */
-@keyframes moveBackground {
-    0% {
-        background-position: 30% 30%;
-    }
-    100% {
-        background-position: 100% 100%;
-    }
-}
-
-/* Containerul principal */
-.container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 50px auto;
-    background: rgba(255, 255, 255, 0.8); /* Fundal alb semi-transparent */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-    text-align: left; /* Aliniază totul la stânga */
-    overflow-y: auto; /* Permite derularea verticală */
-    height: calc(100vh - 100px); /* Permite scroll pe înălțime */
-}
-
-/* Titlu */
-h1 {
-    color: #007bff;
-    margin-bottom: 20px;
-    font-size: 28px;
-}
-
-/* Buton Adăugare */
-.add-btn {
-    display: inline-block;
-    margin-bottom: 20px;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #ffffff;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: background 0.3s ease;
-}
-
-.add-btn:hover {
-    background-color: #0056b3;
-}
-
-/* Tabel */
-table {
+/* Suprapunere întunecată pentru contrast */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    table-layout: fixed; /* Împiedică lățimea tabelului să depășească ecranul */
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Fundal negru semi-transparent */
+    z-index: 0;
 }
 
-thead {
-    background-color: #007bff;
-    color: #ffffff;
-}
-
-th, td {
-    padding: 15px;
+/* Conținutul principal */
+.overlay {
+    position: relative;
+    z-index: 1;
     text-align: center;
-    border: 1px solid #dee2e6;
-    word-wrap: break-word; /* Asigură că textul lung se încadrează corect */
+    animation: fadeIn 2s ease-in-out;
 }
 
-tbody tr:nth-child(even) {
-    background-color: #f8f9fa;
+/* Titlul premium */
+.premium-title {
+    font-size: 3.5rem;
+    background: linear-gradient(90deg, #d4af37, #f1c40f); /* Gradient auriu */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 15px rgba(212, 175, 55, 0.6), 0 0 25px rgba(241, 196, 15, 0.4);
+    margin-bottom: 1rem;
+    animation: fadeInUp 1.5s ease-in-out;
 }
 
-tbody tr:hover {
-    background-color: #e2e6ea;
+/* Tagline */
+.tagline {
+    font-size: 1.2rem;
+    color: #d4af37; /* Auriu subtil */
+    margin-bottom: 2rem;
+    animation: fadeInUp 2s ease-in-out;
 }
 
-/* Buton Ștergere */
-.delete-btn {
-    color: #dc3545;
-    font-weight: bold;
+/* Butoane */
+.buttons .btn {
     text-decoration: none;
-    transition: color 0.3s ease;
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    margin: 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #121212; /* Text închis */
+    background: linear-gradient(90deg, #d4af37, #f1c40f); /* Gradient auriu */
+    border-radius: 25px;
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.5);
+    transition: all 0.3s ease;
 }
 
-.delete-btn:hover {
-    color: #a71d2a;
+.buttons .btn:hover {
+    background: linear-gradient(90deg, #f1c40f, #d4af37);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.7);
+}
+
+/* Animații */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
