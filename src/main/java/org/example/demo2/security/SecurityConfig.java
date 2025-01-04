@@ -42,9 +42,12 @@ public class SecurityConfig {
                         .anyRequest().permitAll()
                 )
                 .formLogin(form -> form
+                        .loginPage("/login") // Specifică pagina de login personalizată
                         .defaultSuccessUrl("/dashboard", true) // Redirecționează mereu la /dashboard după logare
-                        .permitAll() // Permite accesul la pagina implicită de login
+                        .failureUrl("/login?error=true") // Redirecționează la login în caz de eroare
+                        .permitAll() // Permite accesul la pagina de login
                 )
+
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/home")
