@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/competitions")
 public class CompetitionController {
@@ -116,7 +118,7 @@ public class CompetitionController {
         model.addAttribute("competition", competition);
         model.addAttribute("participants", competition.getParticipants());
         model.addAttribute("totalKg", competition.getTotalKg()); // Adaugă greutatea totală în model
-        return "competition-details";
+        return "competition-detailss";
     }
 
     @GetMapping("/sorted/{id}")
@@ -125,7 +127,7 @@ public class CompetitionController {
 
         model.addAttribute("competition", competition);
         model.addAttribute("participants", competition.getParticipants());
-        return "competition-details";
+        return "competition-detailss";
     }
 
     @GetMapping("/recalculate/{id}")
@@ -157,6 +159,27 @@ public class CompetitionController {
         competitionService.saveCompetition(existingCompetition);
 
         return "redirect:/competitions";
+    }
+    @PostMapping("/create")
+    public String createCompetition(@ModelAttribute Competition competition) {
+        competitionService.saveCompetition(competition);
+        return "redirect:/competitions";
+    }
+
+
+    @GetMapping("/search")
+    public String searchCompetition(@RequestParam("code") String code, Model model) {
+        Optional<Competition> competitionOptional = competitionService.findByCode(code);
+
+        if (competitionOptional.isPresent()) {
+            Competition competition = competitionOptional.get();
+            model.addAttribute("competition", competition);
+            model.addAttribute("participants", competition.getParticipants());
+            return "competition_details_participant.html";
+        } else {
+            model.addAttribute("error", "Competiția cu codul " + code + " nu a fost găsită.");
+            return "participant_dashboard";
+        }
     }
 
 

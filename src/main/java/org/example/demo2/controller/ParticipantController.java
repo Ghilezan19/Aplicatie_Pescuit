@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/participants")
@@ -80,7 +78,7 @@ public class ParticipantController {
         model.addAttribute("participants", sortedParticipants);
         model.addAttribute("totalKg", sortedParticipants.stream().mapToDouble(Participant::getKg).sum());
 
-        return "competition-details";
+        return "competition-detailss";
     }
     @GetMapping("/edit/{id}")
     public String showEditParticipantForm(@PathVariable Long id, Model model) {

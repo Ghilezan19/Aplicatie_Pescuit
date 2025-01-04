@@ -19,20 +19,27 @@ public class Competition {
     private Integer sectors;
     @Column(name = "participants")
     private Integer numberOfParticipants=0;
+    @Column(unique = true, nullable = false)
+    private String code;
 
     @ElementCollection
     private List<String> days; // Ziua 1, Ziua 2, etc.
     private double totalKg; // Noul câmp pentru greutatea totală
 
     // Relație many-to-many cu Participant
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinTable(
-            name = "participant_competition", // Numele tabelului intermediar
+            name = "participant_competition",
             joinColumns = @JoinColumn(name = "competition_id"),
             inverseJoinColumns = @JoinColumn(name = "participant_id")
     )
-    private List<Participant> participants=new ArrayList<>();
-
+    private List<Participant> participants = new ArrayList<>();
+    public Competition() {
+        this.code = generateDefaultCode(); // Setează un cod implicit
+    }
+    private String generateDefaultCode() {
+        return "TEMP-" + System.currentTimeMillis(); // Cod temporar
+    }
     // Getters și Setters
     public Long getId() {
         return id;
@@ -109,5 +116,12 @@ public class Competition {
 
     public void setNumberOfParticipants(Integer numberOfParticipants) {
         this.numberOfParticipants = numberOfParticipants;
+    }
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

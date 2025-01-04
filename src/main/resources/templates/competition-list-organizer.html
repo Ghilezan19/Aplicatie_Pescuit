@@ -153,6 +153,7 @@
                     <th>Sectoare</th>
                     <th>Participanți</th>
                     <th>Zile</th>
+                    <th>Cod</th> <!-- Adăugăm noua coloană -->
                     <th>Acțiune</th>
                 </tr>
                 </thead>
@@ -168,15 +169,16 @@
                     <td data-label="Sectors" th:text="${competition.sectors}"></td>
                     <td data-label="Participants" th:text="${competition.numberOfParticipants}"></td>
                     <td data-label="Days" th:text="${competition.days}"></td>
+                    <td data-label="Code" th:text="${competition.code}"></td> <!-- Adăugăm codul -->
                     <td data-label="Actions">
                         <a class="btn" th:href="@{'/competitions/edit/' + ${competition.id}}">Modifică</a>
                         <a class="btn" th:href="@{'/competitions/delete/' + ${competition.id}}"
                            onclick="return confirm('Ești sigur că dorești să ștergi competiția?');">Șterge</a>
                     </td>
-
                 </tr>
                 </tbody>
             </table>
+
         </div>
     </div>
 </div>

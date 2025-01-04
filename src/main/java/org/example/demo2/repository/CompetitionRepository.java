@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CompetitionRepository extends JpaRepository<Competition, Long> {
@@ -15,6 +16,9 @@ public interface CompetitionRepository extends JpaRepository<Competition, Long> 
     @Query("UPDATE Competition c SET c.totalKg = :totalKg WHERE c.id = :id")
     void updateTotalKg(@Param("id") Long id, @Param("totalKg") double totalKg);
     List<Competition> findAllByOrderByDateAsc();
+    boolean existsByCode(String code);
+    Optional<Competition> findByCode(String code);
+
 
 
 

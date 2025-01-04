@@ -4,21 +4,169 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagina de pornire</title>
-    <link rel="stylesheet" th:href="@{/style1.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #0b0c10, #1f2833);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Asigură-te că întregul ecran este folosit */
+        }
+
+        .container {
+            max-width: 600px;
+            width: 90%;
+            background: #161b22;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #58a6ff;
+        }
+
+        .role-text {
+            font-weight: bold;
+            color: #2ea043;
+        }
+
+        p {
+            margin: 10px 0;
+            font-size: 1rem;
+        }
+
+        .actions {
+            margin: 20px 0;
+        }
+
+        .btn, .logout-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            color: #ffffff;
+            background: #238636;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #2ea043;
+            box-shadow: 0 4px 15px rgba(46, 160, 67, 0.5);
+        }
+
+        .logout-btn {
+            background: #d32f2f;
+            margin-top: 20px;
+        }
+
+        .logout-btn:hover {
+            background: #f44336;
+            box-shadow: 0 4px 15px rgba(244, 67, 54, 0.5);
+        }
+
+        .search-form {
+            margin: 20px 0;
+        }
+
+        .search-form form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .search-form label {
+            margin-bottom: 10px;
+            font-size: 1rem;
+            color: #c9d1d9;
+        }
+
+        .search-form input[type="text"] {
+            padding: 10px;
+            width: 80%;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: #0d1117;
+            color: #c9d1d9;
+            margin-bottom: 10px;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-form input[type="text"]:focus {
+            outline: none;
+            border-color: #58a6ff;
+        }
+
+        .search-form button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            background: #238636;
+            color: #ffffff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-form button:hover {
+            background: #2ea043;
+            box-shadow: 0 4px 15px rgba(46, 160, 67, 0.5);
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #9e9e9e;
+        }
+
+        footer a {
+            color: #58a6ff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-<div class="background-overlay"></div>
 <div class="container">
     <h1>Bine ai venit, <span th:text="${username}"></span>!</h1>
     <p>Rol: <span th:text="${roles}" class="role-text"></span></p>
-
-    <p th:text="${message}"></p>  <!-- Va afisa mesajul de succes -->
+    <p th:text="${message}"></p> <!-- Va afisa mesajul de succes -->
 
     <div class="actions">
         <!-- Buton pentru lista competițiilor -->
-        <a href="/competitions" class="btn btn-secondary">Vizualizare Competitii</a>
+        <a href="/competitions" class="btn"><i class="fas fa-list"></i> Vizualizare Competiții</a>
     </div>
-    <a href="/logout" class="logout-btn">Iesire Cont</a>
+
+    <!-- Formular pentru căutarea unei competiții -->
+    <div class="search-form">
+        <form action="/competitions/search" method="get">
+            <label for="code">Introduceți codul competiției:</label>
+            <input type="text" id="code" name="code" required>
+            <button type="submit"><i class="fas fa-search"></i> Caută</button>
+        </form>
+    </div>
+
+    <!-- Buton pentru deconectare -->
+    <a href="/logout" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Ieșire Cont</a>
 </div>
+<footer>
+    <p>© 2025 MyApp. Toate drepturile rezervate. <a href="/privacy">Politica de confidențialitate</a></p>
+</footer>
 </body>
 </html>
