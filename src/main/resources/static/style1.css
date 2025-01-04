@@ -1,119 +1,118 @@
-/* Stil pentru body, cu imagine de fundal și overlay */
-/* Stilizare pentru întregul body */
+/* Fundal */
 body {
-    height: 100vh;
     margin: 0;
     padding: 0;
+    font-family: 'Roboto', sans-serif;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('img.jpg'); /* Calea către imaginea ta */
-    background-size: cover; /* Asigură-te că imaginea acoperă întregul ecran */
-    background-position: center center; /* Centrează imaginea */
-    background-attachment: fixed; /* Efect de parallax */
-    font-family: 'Arial', sans-serif;
-    animation: moveBackground 60s linear infinite; /* Animația de mișcare a imaginii */
+    background: #0f172a; /* Fundal gri-albastru închis */
+    overflow: hidden;
+    color: #f8f9fa;
 }
 
-/* Animația de mișcare a fundalului */
-@keyframes moveBackground {
-    0% {
-        background-position: 30% 30%;
-    }
-    100% {
-        background-position: 100% 100%;
-    }
-}
-
-/* Overlay pentru efect premium */
-body::before {
-    content: '';
+.background-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4));
-    z-index: 0;
+    background: url('img.jpg') no-repeat center center/cover;
+    z-index: -1;
+    filter: brightness(50%) blur(3px);
 }
 
-/* Centrarea textului și containerul principal */
+/* Container */
 .container {
-    position: relative;
-    z-index: 1;
-    background: rgba(255, 255, 255, 0.1); /* Efect de sticlă mată */
-    backdrop-filter: blur(10px);
-    padding: 40px 60px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    text-align: center;
-    max-width: 600px;
+    background: rgba(20, 33, 61, 0.9); /* Gri-albastru închis */
+    padding: 2rem;
+    border-radius: 14px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
     width: 90%;
+    max-width: 480px;
+    text-align: center;
 }
 
-/* Stil pentru titlu */
-h1 {
-    font-size: 3.5em;
-    font-weight: 700;
-    color: #FFD700; /* Auriu premium */
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
-    margin-bottom: 20px;
+/* Titlu */
+.container h1 {
+    font-size: 2rem;
+    color: #FFD700; /* Galben-auriu premium */
+    margin-bottom: 1.2rem;
+    font-family: 'Playfair Display', serif; /* Font serif elegant */
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+    letter-spacing: 1px;
 }
 
-/* Stil pentru subtitlu */
-.role-text {
-    font-size: 1.2em;
-    color: #FF6347;
-    font-weight: bold;
-    margin-bottom: 30px;
+/* Rol */
+.role {
+    font-size: 1rem;
+    color: #e63946; /* Roșu intens */
+    margin-bottom: 1rem;
 }
 
-/* Butoane premium */
+/* Mesaj */
+.message {
+    font-size: 1rem;
+    color: #a8dadc; /* Albastru deschis */
+    margin-bottom: 1.5rem;
+}
+
+/* Butoane */
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem; /* Distanță mai mică între butoane */
+    margin-bottom: 1.5rem;
+}
+
 .btn {
-    display: inline-block;
-    padding: 15px 30px;
-    margin: 15px 0;
-    font-size: 1.2em;
-    font-weight: 600;
-    color: #000;
-    background: linear-gradient(135deg, #FFD700, #FFB800);
-    border: none;
-    border-radius: 30px;
-    text-transform: uppercase;
+    display: block;
     text-decoration: none;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    padding: 0.6rem 1.2rem; /* Padding ajustat */
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 8px;
     transition: all 0.3s ease;
+    width: 180px; /* Lățime fixă pentru dimensiune constantă */
+    margin: 0 auto; /* Centrare pe ecran */
 }
 
-.btn:hover {
-    background: linear-gradient(135deg, #FFB800, #FFD700);
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-    color: white;
+.btn-primary {
+    background: #FFD700; /* Galben-auriu */
+    color: #121212;
+    box-shadow: 0 3px 8px rgba(255, 215, 0, 0.4);
 }
 
-/* Link logout */
+.btn-primary:hover {
+    background: #e6c200;
+    box-shadow: 0 5px 12px rgba(255, 215, 0, 0.6);
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background: #1f2937; /* Gri închis */
+    color: #f8f9fa;
+    border: 1px solid #475569;
+}
+
+.btn-secondary:hover {
+    background: #2d3748; /* Gri mai deschis */
+    color: #ffffff;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Logout */
 .logout-btn {
-    color: #FFD700;
+    display: block;
     text-decoration: none;
-    font-size: 1em;
-    font-weight: 500;
-    margin-top: 20px;
-    display: inline-block;
+    color: #FFD700;
+    font-size: 0.8rem; /* Font mai mic */
+    margin-top: 1rem;
+    transition: color 0.3s ease;
 }
 
 .logout-btn:hover {
-    color: #FF6347;
-    text-decoration: underline;
-}
-
-/* Footer */
-footer {
-    position: absolute;
-    bottom: 20px;
-    width: 100%;
-    text-align: center;
-    font-size: 0.9em;
-    color: rgba(255, 255, 255, 0.7);
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+    color: #e6c200;
 }

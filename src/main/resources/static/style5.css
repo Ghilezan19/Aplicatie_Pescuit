@@ -1,3 +1,4 @@
+/* Stil general */
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -6,7 +7,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: url('lake5.jpg') no-repeat center center fixed; /* Imaginea de fundal */
+    background: url('img.jpg') no-repeat center center fixed; /* Imaginea de fundal */
     background-size: cover;
     position: relative;
 }
@@ -23,55 +24,60 @@ body::before {
     z-index: 0;
 }
 
+/* Container formular */
 .form-container {
     position: relative;
-    z-index: 1; /* Deasupra suprapunerii */
-    background: rgba(30, 30, 30, 0.9); /* Fundal semi-transparent */
-    border: 2px solid #d4af37; /* Auriu pentru margini */
+    z-index: 1;
+    background: rgba(20, 33, 61, 0.9); /* Fundal albastru închis */
+    border: 2px solid #FFD700; /* Galben pentru margini */
     border-radius: 15px;
-    padding: 1.5rem;
-    width: 90%;
-    max-width: 350px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8); /* Efect premium */
+    padding: 1rem;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
     text-align: center;
 }
 
-.form-container h2 {
-    font-size: 24px;
+/* Titlu */
+.form-container h1 {
+    font-size: 20px;
     font-weight: bold;
-    color: #d4af37;
+    color: #FFD700; /* Galben pentru titlu */
     margin-bottom: 1rem;
 }
 
+/* Etichete */
 label {
     display: block;
-    margin: 0.6rem 0 0.3rem;
+    margin: 0.5rem 0 0.3rem;
     font-size: 14px;
     text-align: left;
-    color: #ccc;
+    color: #f5f5f5;
 }
 
-input, select, button {
+/* Input-uri */
+input, button {
     width: 100%;
-    padding: 0.6rem;
-    margin-bottom: 0.8rem;
+    padding: 0.5rem;
+    margin-bottom: 0.6rem;
     border: 1px solid #444;
     border-radius: 5px;
-    font-size: 13px;
+    font-size: 12px;
 }
 
-input, select {
-    background: #222;
-    color: #fff;
+input {
+    background: #1b263b; /* Albastru foarte închis */
+    color: #f5f5f5;
 }
 
-input:focus, select:focus {
+input:focus {
     outline: none;
-    box-shadow: 0 0 5px #d4af37;
+    box-shadow: 0 0 5px #FFD700; /* Efect galben la focus */
 }
 
+/* Buton */
 button {
-    background: #d4af37;
+    background: #FFD700; /* Fundal galben */
     color: #121212;
     font-weight: bold;
     cursor: pointer;
@@ -79,58 +85,28 @@ button {
 }
 
 button:hover {
-    background: #f1c40f;
+    background: #e6c200; /* Galben mai închis la hover */
     transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(212, 175, 55, 0.6);
+    box-shadow: 0 6px 15px rgba(255, 215, 0, 0.6);
 }
 
-.error-message {
-    color: #e74c3c;
-    font-size: 14px;
-    margin-top: -0.5rem;
-    margin-bottom: 1rem;
-}
-
-#organizer-password {
-    display: none;
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-#organizer-password label {
-    margin-top: 0.8rem;
-}
-
-.form-container {
-    animation: fadeIn 1s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
+/* Responsivitate */
 @media (max-width: 500px) {
     .form-container {
-        padding: 1rem;
+        padding: 0.8rem;
         border-radius: 10px;
     }
 
-    input, select, button {
-        font-size: 12px;
-        padding: 0.5rem;
+    input, button {
+        font-size: 11px;
+        padding: 0.4rem;
     }
 
     label {
         font-size: 12px;
     }
 
-    .form-container h2 {
-        font-size: 20px;
+    .form-container h1 {
+        font-size: 18px;
     }
 }

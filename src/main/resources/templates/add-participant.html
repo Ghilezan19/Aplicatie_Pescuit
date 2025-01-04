@@ -1,13 +1,67 @@
-<form action="/participants/save" method="post">
-    <label for="name">Nume Participant:</label>
-    <input type="text" id="name" name="name" required>
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adaugă Participant</title>
+    <link rel="stylesheet" th:href="@{/style10.css}">
+    <style>
+        /* Stilizare simplă pentru butonul de redirecționare */
+        .dashboard-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #238636; /* Verde */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
 
-    <label for="competitionId">Selectează Competiția:</label>
-    <select id="competitionId" name="competitionId" required>
-        <option th:each="competition : ${competitions}"
-                th:value="${competition.id}"
-                th:text="${competition.name}"></option>
-    </select>
+        .dashboard-btn:hover {
+            background-color: #2ea043; /* Verde mai deschis */
+            transform: translateY(-2px);
+        }
 
-    <button type="submit">Salvează</button>
-</form>
+        /* Mesaj de succes */
+        .success-message {
+            color: green;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="background-overlay"></div>
+<div class="form-container">
+    <h1>Adaugă Participant</h1>
+
+    <!-- Afișare mesaj de succes -->
+    <div th:if="${message}" class="success-message">
+        <p th:text="${message}"></p>
+    </div>
+
+    <!-- Formular pentru adăugarea participantului -->
+    <form action="/participants/save" method="post">
+        <label for="name">Nume Participant:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="competitionId">Selectează Competiția:</label>
+        <select id="competitionId" name="competitionId" required>
+            <option value="" disabled selected>Selectează o competiție</option>
+            <option th:each="competition : ${competitions}"
+                    th:value="${competition.id}"
+                    th:text="${competition.name}"></option>
+        </select>
+
+        <button type="submit">Salvează</button>
+    </form>
+
+    <!-- Buton pentru redirecționare la Dashboard -->
+    <a href="/dashboard" class="dashboard-btn">Pagina Principala</a>
+</div>
+</body>
+</html>

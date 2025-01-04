@@ -117,4 +117,31 @@ public class CompetitionController {
         competitionService.updateTotalKg(id); // Recalculează greutatea totală
         return "redirect:/competitions/" + id;
     }
+    @GetMapping("/edit/{id}")
+    public String showEditForm(@PathVariable Long id, Model model) {
+        Competition competition = competitionService.getCompetitionById(id);
+        model.addAttribute("competition", competition);
+        return "competition-edit-form"; // Creăm un nou template pentru editare
+    }
+
+    @PostMapping("/update/{id}")
+    public String updateCompetition(@PathVariable Long id, @ModelAttribute("competition") Competition updatedCompetition) {
+        // Preluăm competiția existentă
+        Competition existingCompetition = competitionService.getCompetitionById(id);
+
+        // Actualizăm câmpurile
+        existingCompetition.setName(updatedCompetition.getName());
+        existingCompetition.setLocation(updatedCompetition.getLocation());
+        existingCompetition.setDate(updatedCompetition.getDate());
+        existingCompetition.setSectors(updatedCompetition.getSectors());
+        existingCompetition.setDays(updatedCompetition.getDays());
+        existingCompetition.setNumberOfParticipants(updatedCompetition.getNumberOfParticipants());
+
+        // Salvăm modificările
+        competitionService.saveCompetition(existingCompetition);
+
+        return "redirect:/competitions";
+    }
+
+
 }

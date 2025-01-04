@@ -3,45 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Competition</title>
+    <title>Adaugă Competiție</title>
     <link rel="stylesheet" th:href="@{/style5.css}">
+    <style>
+        .error-message {
+            color: red;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 <body>
 <div class="form-container">
-    <h1>Add Competition</h1>
-    <form action="/competitions/save" method="post">
+    <h1>Adaugă Competiție</h1>
+
+    <!-- Afișare mesaj de eroare dacă există câmpuri nevalide -->
+    <div id="error-message" class="error-message"></div>
+
+    <form id="competition-form" action="/competitions/save" method="post" onsubmit="return validateForm()">
         <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" placeholder="Enter competition name" required>
+            <label for="name">Nume:</label>
+            <input type="text" id="name" name="name" placeholder="" required>
         </div>
 
         <div class="form-group">
-            <label for="location">Location:</label>
-            <input type="text" id="location" name="location" placeholder="Enter location">
+            <label for="location">Locație:</label>
+            <input type="text" id="location" name="location" placeholder="" required>
         </div>
 
         <div class="form-group">
-            <label for="date">Date:</label>
-            <input type="date" id="date" name="date">
+            <label for="date">Data:</label>
+            <input type="date" id="date" name="date" required>
         </div>
 
         <div class="form-group">
-            <label for="sectors">Sectors:</label>
-            <input type="number" id="sectors" name="sectors" placeholder="Enter number of sectors">
+            <label for="sectors">Număr Sectoare:</label>
+            <input type="number" id="sectors" name="sectors" placeholder="" min="1" required>
         </div>
 
         <div class="form-group">
-            <label for="participants">Participants:</label>
-            <input type="number" id="participants" name="participants" placeholder="Enter number of participants">
+            <label for="participants">Număr Participanți:</label>
+            <input type="number" id="participants" name="participants" placeholder="" min="1" required>
         </div>
 
         <div class="form-group">
-            <label for="days">Days (comma-separated):</label>
-            <input type="text" id="days" name="days" placeholder="e.g., Day 1, Day 2">
+            <label for="days">Zile Desfășurare (separate prin virgulă):</label>
+            <input type="text" id="Days" name="days" placeholder="ex: 1,2,3 (3 zile)" required>
         </div>
 
-        <button type="submit">Save</button>
+        <button type="submit">Salvează</button>
     </form>
 </div>
+
+<script>
+    function validateForm() {
+        const errorMessage = document.getElementById('error-message');
+        errorMessage.innerHTML = ''; // Resetează mesajele de eroare
+
+        const name = document.getElementById('name').value.trim();
+        const location = document.getElementById('location').value.trim();
+        const date = document.getElementById('date').value;
+        const sectors = document.getElementById('sectors').value;
+        const participants = document.getElementById('participants').value;
+        const Days = document.getElementById('Days').value.trim();
+
+        // Verifică dacă toate câmpurile sunt completate
+        if (!name || !location || !date || !days) {
+            errorMessage.innerHTML = 'Toate câmpurile sunt obligatorii!';
+            return false;
+        }
+
+        // Verifică dacă valorile numerice sunt mai mari decât 0
+        if (sectors <= 0 || participants <= 0) {
+            errorMessage.innerHTML = 'Numărul de sectoare și participanți trebuie să fie mai mare decât 0!';
+            return false;
+        }
+
+        // Validare suplimentară pentru câmpul "days"
+        const daysPattern = /^[0-9]+(,[0-9]+)*$/; // Permite doar numere separate prin virgulă
+        if (!daysPattern.test(days)) {
+            errorMessage.innerHTML = 'Câmpul "Zile Desfășurare" trebuie să conțină doar numere separate prin virgulă!';
+            return false;
+        }
+
+        return true; // Dacă toate validările sunt trecute, formularul poate fi trimis
+    }
+</script>
 </body>
 </html>

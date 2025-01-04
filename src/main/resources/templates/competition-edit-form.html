@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Competition</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0d1117;
+            color: #c9d1d9;
+        }
+        form {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #161b22;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #30363d;
+            border-radius: 4px;
+            background: #21262d;
+            color: #c9d1d9;
+        }
+        button {
+            display: inline-block;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            background: #238636;
+            color: #ffffff;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #2ea043;
+        }
+    </style>
+</head>
+<body>
+<h1>Edit Competition</h1>
+<form th:action="@{'/competitions/update/' + ${competition.id}}" th:object="${competition}" method="post">
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" th:value="${competition.name}" required>
+
+    <label for="location">Location</label>
+    <input type="text" id="location" name="location" th:value="${competition.location}" required>
+
+    <label for="date">Date</label>
+    <input type="date" id="date" name="date" th:value="${competition.date}" required>
+
+    <label for="sectors">Sectors</label>
+    <input type="number" id="sectors" name="sectors" th:value="${competition.sectors}" required>
+
+    <label for="days">Days</label>
+    <textarea id="days" name="days" th:text="${competition.days}"></textarea>
+
+    <label for="numberOfParticipants">Number of Participants</label>
+    <input type="number" id="numberOfParticipants" name="numberOfParticipants" th:value="${competition.numberOfParticipants}" required>
+
+    <button type="submit">Save Changes</button>
+</form>
+</body>
+</html>

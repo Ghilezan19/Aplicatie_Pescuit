@@ -33,7 +33,9 @@ public class ParticipantController {
     }
 
     @PostMapping("/save")
-    public String saveParticipant(@ModelAttribute Participant participant, @RequestParam("competitionId") Long competitionId, Model model) {
+    public String saveParticipant(@ModelAttribute Participant participant,
+                                  @RequestParam("competitionId") Long competitionId,
+                                  Model model) {
         Competition competition = competitionService.getCompetitionById(competitionId);
         participant.addCompetition(competition);
         participantService.saveParticipant(participant);
@@ -41,8 +43,13 @@ public class ParticipantController {
         // Adaugă un mesaj de succes
         model.addAttribute("message", "Participantul a fost adăugat cu succes!");
 
-        return "redirect:/dashboard";  // Sau o altă pagină de vizualizare
+        // Reîncarcă lista de competiții și formularul pentru adăugare
+        model.addAttribute("participant", new Participant());
+        model.addAttribute("competitions", competitionService.getAllCompetitions());
+
+        return "add-participant"; // Rămâne pe aceeași pagină
     }
+
     @PostMapping("/addKg/{id}")
     @ResponseBody
     public String addKg(@PathVariable Long id, @RequestBody Map<String, String> payload) {
@@ -51,8 +58,14 @@ public class ParticipantController {
         participant.setKg(participant.getKg() + newKg); // Adaugă kilogramele noi la cele existente
         participantService.saveParticipant(participant);
 
+        // Actualizează greutatea totală a competiției
+        participant.getCompetitions().forEach(competition -> {
+            competitionService.updateTotalKg(competition.getId());
+        });
+
         return "Kilogramele au fost adăugate cu succes!";
     }
+
     @GetMapping("/details/{competitionId}")
     public String showCompetitionDetails(@PathVariable Long competitionId, Model model) {
         Competition competition = competitionService.getCompetitionById(competitionId);

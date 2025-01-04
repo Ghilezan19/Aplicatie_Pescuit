@@ -16,9 +16,9 @@ public class Competition {
     private String name;
     private String location;
     private LocalDate date;
-
     private Integer sectors;
-    private Integer totalParticipants; // Redenumit pentru claritate
+    @Column(name = "participants")
+    private Integer numberOfParticipants=0;
 
     @ElementCollection
     private List<String> days; // Ziua 1, Ziua 2, etc.
@@ -31,7 +31,7 @@ public class Competition {
             joinColumns = @JoinColumn(name = "competition_id"),
             inverseJoinColumns = @JoinColumn(name = "participant_id")
     )
-    private List<Participant> participants;
+    private List<Participant> participants=new ArrayList<>();
 
     // Getters și Setters
     public Long getId() {
@@ -74,14 +74,6 @@ public class Competition {
         this.sectors = sectors;
     }
 
-    public Integer getTotalParticipants() {
-        return totalParticipants;
-    }
-
-    public void setTotalParticipants(Integer totalParticipants) {
-        this.totalParticipants = totalParticipants;
-    }
-
     public List<String> getDays() {
         return days;
     }
@@ -109,5 +101,13 @@ public class Competition {
         this.totalKg = participants.stream()
                 .mapToDouble(Participant::getKg)
                 .sum();
+    }
+
+    public Integer getNumberOfParticipants() {
+        return numberOfParticipants;
+    }
+
+    public void setNumberOfParticipants(Integer numberOfParticipants) {
+        this.numberOfParticipants = numberOfParticipants;
     }
 }
