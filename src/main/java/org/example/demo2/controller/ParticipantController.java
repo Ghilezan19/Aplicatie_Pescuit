@@ -82,8 +82,33 @@ public class ParticipantController {
 
         return "competition-details";
     }
+    @GetMapping("/edit/{id}")
+    public String showEditParticipantForm(@PathVariable Long id, Model model) {
+        Participant participant = participantService.getParticipantById(id);
+        model.addAttribute("participant", participant);
+        return "edit-participant"; // Numele fișierului Thymeleaf pentru editare
+    }
+    @GetMapping("/competition-list-organizer")
+    public String showCompetitionList() {
+        return "competition-list-organizer";
+    }
 
+    @PostMapping("/update/{id}")
+    public String updateParticipant(@PathVariable Long id, @ModelAttribute Participant updatedParticipant) {
+        Participant existingParticipant = participantService.getParticipantById(id);
 
+        // Actualizăm câmpurile necesare
+        existingParticipant.setName(updatedParticipant.getName());
+        existingParticipant.setKg(updatedParticipant.getKg());
+
+        participantService.saveParticipant(existingParticipant);
+
+        // Obținem competitionId-ul din lista de competiții ale participantului
+        Long competitionId = existingParticipant.getCompetitions().iterator().next().getId();
+
+        // Redirecționăm către pagina competiției
+        return "redirect:/competitions/" + competitionId;
+    }
 
 
 }

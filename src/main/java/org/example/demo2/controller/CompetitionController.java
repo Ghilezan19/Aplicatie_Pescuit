@@ -1,5 +1,4 @@
 package org.example.demo2.controller;
-
 import org.example.demo2.model.Competition;
 import org.example.demo2.model.Participant;
 import org.example.demo2.repository.CompetitionRepository;
@@ -10,10 +9,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Comparator;
 import java.util.List;
-
 @Controller
 @RequestMapping("/competitions")
 public class CompetitionController {
@@ -41,8 +38,27 @@ public class CompetitionController {
 
     @GetMapping
     public String listCompetitions(Model model) {
-        model.addAttribute("competitions", competitionService.getAllCompetitions());
-        return "competition-list";
+        List<Competition> competitions = competitionService.getAllCompetitions();
+        model.addAttribute("competitions", competitions);
+
+        // Obține utilizatorul autentificat
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UserDetails) {
+            UserDetails currentUser = (UserDetails) principal;
+            String roles = currentUser.getAuthorities().toString();
+
+            // Verifică rolurile utilizatorului
+            if (roles.contains("PARTICIPANT")) {
+                return "competition-list-participant"; // Pagina pentru participant
+            } else if (roles.contains("ORGANIZER")) {
+                return "competition-list-organizer"; // Pagina pentru organizator
+            } else {
+                return "access-denied"; // Pagina pentru acces interzis
+            }
+        } else {
+            return "error"; // Dacă principalul nu este de tip UserDetails
+        }
     }
 
     @GetMapping("/add")

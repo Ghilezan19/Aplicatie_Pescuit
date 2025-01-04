@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editare Participant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            color: #e2e8f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 30px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #facc15; /* Golden accent */
+            font-weight: 600;
+        }
+
+        label {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: block;
+            color: #cbd5e1;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #facc15; /* Golden glow */
+            outline: none;
+            box-shadow: 0 0 8px #facc15;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #facc15, #fbbf24);
+            color: #0f172a;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #fbbf24, #facc15);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(250, 204, 21, 0.5);
+        }
+
+        .btn-back {
+            display: block;
+            margin-top: 15px;
+            text-align: center;
+            padding: 12px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #10b981, #22c55e);
+            color: #0f172a;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-back:hover {
+            background: linear-gradient(135deg, #22c55e, #10b981);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.5);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <h1>Editare Participant</h1>
+    <form th:action="@{/participants/update/{id}(id=${participant.id})}" th:object="${participant}" method="post" novalidate>
+        <label for="name">Nume Participant:</label>
+        <input type="text" id="name" name="name" th:value="${participant.name}" placeholder="Introduceți numele...">
+
+        <label for="kg">KG:</label>
+        <input type="number" id="kg" name="kg" th:value="${participant.kg}" step="any" placeholder="Introduceți KG...">
+
+        <button type="submit">Salvează</button>
+    </form>
+    <a th:href="@{/competitions/{competitionId}(competitionId=${participant.competitions.iterator().next().id})}" class="btn-back">Inapoi</a>
+</div>
+</body>
+</html>

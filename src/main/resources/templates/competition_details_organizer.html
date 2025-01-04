@@ -81,7 +81,6 @@
             padding: 5px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            margin-right: 10px;
             font-size: 12px;
         }
 
@@ -89,8 +88,8 @@
             background: #4CAF50;
             color: #fff;
             border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
+            padding: 3px 7px; /* Butoane mai mici */
+            border-radius: 3px; /* Colțuri mai rotunjite */
             font-size: 12px;
             cursor: pointer;
             transition: background 0.3s ease;
@@ -98,6 +97,12 @@
 
         .btn:hover {
             background: #45a049;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 5px; /* Spațiu între butoane */
+            align-items: center; /* Aliniere pe verticală */
         }
 
         .details p {
@@ -146,7 +151,7 @@
             <th>Clasament</th>
             <th>Nume</th>
             <th>KG</th>
-            <th>Adaugă KG</th>
+            <th>Adaugă/Editare</th>
         </tr>
         </thead>
         <tbody>
@@ -156,12 +161,16 @@
             <td th:text="${participant.name}"></td>
             <td th:text="${participant.kg}"></td>
             <td>
-                <input type="number" name="kg" min="0" step="0.1" placeholder="KG..." th:id="'kg-' + ${participant.id}">
-                <button th:onclick="'addKg(' + ${participant.id} + ')'" class="btn">Adaugă</button>
+                <div class="button-container">
+                    <input type="number" name="kg" min="0" step="0.1" placeholder="KG..." th:id="'kg-' + ${participant.id}">
+                    <button th:onclick="'addKg(' + ${participant.id} + ')'" class="btn">Adaugă</button>
+                    <button class="btn" th:onclick="'window.location.href=\'/participants/edit/' + ${participant.id} + '\''">Editare</button>
+                </div>
             </td>
         </tr>
         </tbody>
     </table>
+
 </div>
 <div class="details">
     <div>

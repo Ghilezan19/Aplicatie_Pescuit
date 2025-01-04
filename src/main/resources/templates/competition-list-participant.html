@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competitions</title>
+    <style>
+        /* General styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #0d1117; /* Elegant dark background */
+            color: #c9d1d9; /* Soft white text */
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            text-align: center;
+            color: #58a6ff; /* Blue accent */
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: bold;
+        }
+
+        /* Table container */
+        .table-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #161b22; /* Slightly lighter dark background */
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+
+        /* Scrollable table wrapper */
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        /* Table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 900px; /* Ensure scrollability for smaller screens */
+            background-color: #161b22;
+        }
+
+        thead {
+            background: #21262d; /* Dark header background */
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            color: #8b949e; /* Muted text for header */
+            border-bottom: 2px solid #30363d; /* Header bottom border */
+        }
+
+        td {
+            padding: 15px;
+            font-size: 1rem;
+            color: #c9d1d9; /* Light text for rows */
+            border-bottom: 1px solid #30363d; /* Row bottom border */
+        }
+
+        tr:hover {
+            background-color: #21262d; /* Highlight row on hover */
+            transition: background-color 0.2s ease;
+        }
+
+        td a {
+            color: #58a6ff; /* Blue links */
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        td a:hover {
+            color: #1f6feb; /* Brighter blue on hover */
+        }
+
+        /* Button styling */
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-align: center;
+            background: #238636; /* Green button */
+            color: #ffffff; /* White text */
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #2ea043; /* Brighter green on hover */
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(46, 160, 67, 0.4);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            thead tr {
+                display: none;
+            }
+
+            tr {
+                margin-bottom: 15px;
+                border: 1px solid #30363d;
+                border-radius: 8px;
+                overflow: hidden;
+            }
+
+            td {
+                display: flex;
+                justify-content: space-between;
+                padding: 15px;
+                font-size: 0.9rem;
+            }
+
+            td:before {
+                content: attr(data-label);
+                font-weight: bold;
+                text-transform: uppercase;
+                color: #8b949e;
+                flex: 1;
+            }
+
+            td:last-child {
+                justify-content: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+<div>
+    <h1>Competiții</h1>
+    <div class="table-container">
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                <tr>
+                    <th>Nume</th>
+                    <th>Locație</th>
+                    <th>Data</th>
+                    <th>Sectoare</th>
+                    <th>Participanți</th>
+                    <th>Zile</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="competition : ${competitions}">
+                    <td data-label="Name">
+                        <a th:href="@{'/competitions/' + ${competition.id}}">
+                            <span th:text="${competition.name}"></span>
+                        </a>
+                    </td>
+                    <td data-label="Location" th:text="${competition.location}"></td>
+                    <td data-label="Date" th:text="${competition.date}"></td>
+                    <td data-label="Sectors" th:text="${competition.sectors}"></td>
+                    <td data-label="Participants" th:text="${competition.numberOfParticipants}"></td>
+                    <td data-label="Days" th:text="${competition.days}"></td>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

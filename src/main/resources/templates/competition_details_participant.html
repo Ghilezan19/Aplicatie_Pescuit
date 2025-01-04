@@ -3,73 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Detalii Competitie</title>
+    <title>Detalii Competiție</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        /* Reset general */
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #fff;
             display: flex;
-        }
-
-        h1 {
-            margin: 20px;
-        }
-
-        .details {
+            min-height: 100vh;
             padding: 20px;
-            flex: 1;
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        th, td {
-            text-align: left;
-            padding: 8px;
-        }
-
-        th {
-            background-color: #45d851;
-            font-weight: bold;
-        }
-
-        tr:nth-child(even) {
-            background-color: #ffffff;
-        }
-
-        tr:hover {
-            background-color: #70e1ff;
         }
 
         .table-container {
-            flex: 0 0 30%;
-            max-height: 90vh; /* Table height fixed for scrolling */
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
             overflow-y: auto;
-            border-right: 1px solid #ccc;
+            margin-right: 20px;
+            padding: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            max-height: calc(100vh - 40px);
+        }
+
+        .details {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        h2, h1 {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #FFD700;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        th, td {
             padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background: #4CAF50;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        tr:nth-child(even) {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        tr:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transition: background 0.3s ease-in-out;
+        }
+
+        input[type="number"] {
+            width: 70px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+            font-size: 12px;
         }
 
         .btn {
-            background-color: #4CAF50;
-            color: white;
+            background: #4CAF50;
+            color: #fff;
             border: none;
             padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
             cursor: pointer;
-            border-radius: 3px;
+            transition: background 0.3s ease;
         }
 
         .btn:hover {
-            background-color: #45a049;
+            background: #45a049;
+        }
+
+        .details p {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .details a {
+            display: inline-block;
+            margin-top: 20px;
+            text-align: center;
+            background: #FFD700;
+            color: #000;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .details a:hover {
+            background: #e6c200;
+        }
+
+        /* Scrollbar styling */
+        .table-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .table-container::-webkit-scrollbar-thumb {
+            background: #4CAF50;
+            border-radius: 5px;
+        }
+
+        .table-container::-webkit-scrollbar-thumb:hover {
+            background: #45a049;
         }
     </style>
 </head>
 <body>
 <div class="table-container">
-    <h2>Participanti</h2>
+    <h2>Participanți</h2>
     <table>
         <thead>
         <tr>
@@ -84,21 +154,27 @@
             <td th:text="${iterStat.index + 1}"></td> <!-- Afișăm locul -->
             <td th:text="${participant.name}"></td>
             <td th:text="${participant.kg}"></td>
+            <td>
+            </td>
         </tr>
         </tbody>
     </table>
 </div>
 <div class="details">
-    <h1 th:text="'Competitie: ' + ${competition.name}"></h1>
-    <p><strong>Locatie:</strong> <span th:text="${competition.location}"></span></p>
-    <p><strong>Data:</strong> <span th:text="${competition.date}"></span></p>
-    <p><strong>Sectoare:</strong> <span th:text="${competition.sectors}"></span></p>
-
-    <!-- Afișează greutatea totală -->
-    <p><strong>Greutate Totala:</strong> <span th:text="${competition.totalKg} + ' kg'"></span></p>
-
-    <!-- Buton pentru recalculare manuală -->
-    <a href="/competitions" class="btn">Inapoi la competitii</a>
+    <div>
+        <h1 th:text="'Competiție: ' + ${competition.name}"></h1>
+        <p><strong>Locație:</strong> <span th:text="${competition.location}"></span></p>
+        <p><strong>Data:</strong> <span th:text="${competition.date}"></span></p>
+        <p><strong>Sectoare:</strong> <span th:text="${competition.sectors}"></span></p>
+        <p><strong>Greutate Totală:</strong> <span th:text="${competition.totalKg} + ' kg'"></span></p>
+    </div>
+    <a href="/competitions">Înapoi la competiții</a>
 </div>
+<script>
+    function addKg(participantId) {
+        const kgInput = document.getElementById('kg-' + participantId);
+        const kgValue = parseFloat(kgInput.value);
+    }
+</script>
 </body>
 </html>
