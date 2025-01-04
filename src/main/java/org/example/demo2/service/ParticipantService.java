@@ -26,5 +26,12 @@ public class ParticipantService {
     public List<Participant> getAllParticipants() {
         return participantRepository.findAll();
     }
+    public void deleteParticipant(Long id) {
+        if (participantRepository.existsById(id)) {
+            participantRepository.deleteById(id);
+        } else {
+            throw new RuntimeException("Participantul cu ID-ul " + id + " nu există.");
+        }
+    }
 
 }

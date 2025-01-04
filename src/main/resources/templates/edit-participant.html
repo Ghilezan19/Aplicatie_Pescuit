@@ -108,6 +108,25 @@
             box-shadow: 0 4px 15px rgba(16, 185, 129, 0.5);
         }
 
+        .btn-delete {
+            margin-top: 15px;
+            background: linear-gradient(135deg, #ef4444, #f87171);
+            color: white;
+            font-weight: 600;
+            text-align: center;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-delete:hover {
+            background: linear-gradient(135deg, #f87171, #ef4444);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.5);
+        }
+
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -132,7 +151,14 @@
 
         <button type="submit">Salvează</button>
     </form>
-    <a th:href="@{/competitions/{competitionId}(competitionId=${participant.competitions.iterator().next().id})}" class="btn-back">Inapoi</a>
+
+    <!-- Buton Înapoi -->
+    <a th:href="@{/competitions/{competitionId}(competitionId=${participant.competitions.iterator().next().id})}" class="btn-back">Înapoi</a>
+
+    <!-- Formular Ștergere -->
+    <form th:action="@{/participants/delete/{id}(id=${participant.id})}" method="post" onsubmit="return confirm('Sigur doriți să ștergeți acest participant?');">
+        <button type="submit" class="btn-delete">Șterge Participant</button>
+    </form>
 </div>
 </body>
 </html>

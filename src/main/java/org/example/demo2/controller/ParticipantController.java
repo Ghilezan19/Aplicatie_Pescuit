@@ -109,6 +109,22 @@ public class ParticipantController {
         // Redirecționăm către pagina competiției
         return "redirect:/competitions/" + competitionId;
     }
+    @PostMapping("/delete/{id}")
+    public String deleteParticipant(@PathVariable Long id) {
+        // Obține participantul înainte de a-l șterge
+        Participant participant = participantService.getParticipantById(id);
+
+        // Obține competitionId din lista de competiții ale participantului
+        Long competitionId = participant.getCompetitions().iterator().next().getId();
+
+        // Șterge participantul
+        participantService.deleteParticipant(id);
+
+        // Redirecționează către pagina competiției
+        return "redirect:/competitions/" + competitionId;
+    }
+
+
 
 
 }
