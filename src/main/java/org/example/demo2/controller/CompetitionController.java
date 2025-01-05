@@ -70,11 +70,11 @@ public class CompetitionController {
     }
 
     @PostMapping("/save")
-    public String saveCompetition(@ModelAttribute("competition") Competition competition) {
-        competitionService.saveCompetition(competition);
-        return "redirect:/competitions";
+    public String saveCompetition(@ModelAttribute Competition competition) {
+        // Salvează competiția în baza de date
+        competitionRepository.save(competition);
+        return "redirect:/competitions"; // Redirecționează către lista de competiții
     }
-
     @GetMapping("/{id}")
     public String viewCompetitionDetails(@PathVariable Long id, Model model) {
         Competition competition = competitionService.getCompetitionById(id);
