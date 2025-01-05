@@ -16,21 +16,32 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh; /* Asigură-te că întregul ecran este folosit */
+            height: 100vh;
+            overflow: hidden;
         }
 
         .container {
-            max-width: 600px;
+            max-width: 400px;
             width: 90%;
-            background: #161b22;
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            background: #1b1f26;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: 1.8rem;
             margin-bottom: 10px;
             color: #58a6ff;
         }
@@ -38,46 +49,50 @@
         .role-text {
             font-weight: bold;
             color: #2ea043;
+            font-size: 0.9rem;
         }
 
         p {
-            margin: 10px 0;
-            font-size: 1rem;
+            margin: 8px 0;
+            font-size: 0.9rem;
+            color: #c9d1d9;
         }
 
         .actions {
-            margin: 20px 0;
+            margin: 15px 0;
         }
 
         .btn, .logout-btn {
             display: inline-block;
-            padding: 12px 24px;
+            padding: 10px 20px;
             border-radius: 8px;
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 600;
             text-decoration: none;
             color: #ffffff;
             background: #238636;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(35, 134, 54, 0.3);
         }
 
         .btn:hover {
             background: #2ea043;
-            box-shadow: 0 4px 15px rgba(46, 160, 67, 0.5);
+            box-shadow: 0 4px 20px rgba(46, 160, 67, 0.5);
         }
 
         .logout-btn {
             background: #d32f2f;
-            margin-top: 20px;
+            margin-top: 15px;
         }
 
         .logout-btn:hover {
             background: #f44336;
-            box-shadow: 0 4px 15px rgba(244, 67, 54, 0.5);
+            box-shadow: 0 4px 20px rgba(244, 67, 54, 0.5);
         }
 
         .search-form {
-            margin: 20px 0;
+            margin: 15px 0;
+            width: 100%;
         }
 
         .search-form form {
@@ -87,33 +102,34 @@
         }
 
         .search-form label {
-            margin-bottom: 10px;
-            font-size: 1rem;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
             color: #c9d1d9;
         }
 
         .search-form input[type="text"] {
             padding: 10px;
-            width: 80%;
+            width: 90%;
             border: 1px solid #30363d;
             border-radius: 8px;
-            font-size: 1rem;
+            font-size: 0.9rem;
             background: #0d1117;
             color: #c9d1d9;
             margin-bottom: 10px;
-            transition: border-color 0.3s ease;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .search-form input[type="text"]:focus {
             outline: none;
             border-color: #58a6ff;
+            box-shadow: 0 0 8px rgba(88, 166, 255, 0.8);
         }
 
         .search-form button {
-            padding: 12px 24px;
+            padding: 10px 20px;
             border: none;
             border-radius: 8px;
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: bold;
             background: #238636;
             color: #ffffff;
@@ -127,8 +143,11 @@
         }
 
         footer {
-            margin-top: 20px;
-            font-size: 0.9rem;
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            font-size: 0.8rem;
             color: #9e9e9e;
         }
 
@@ -146,27 +165,23 @@
 <div class="container">
     <h1>Bine ai venit, <span th:text="${username}"></span>!</h1>
     <p>Rol: <span th:text="${roles}" class="role-text"></span></p>
-    <p th:text="${message}"></p> <!-- Va afisa mesajul de succes -->
+    <p th:text="${message}"></p>
 
     <div class="actions">
-        <!-- Buton pentru lista competițiilor -->
-        <a href="/competitions" class="btn"><i class="fas fa-list"></i> Vizualizare Competiții</a>
+        <a href="/competitions" class="btn"><i class="fas fa-list"></i> Vizualizare Competitii</a>
     </div>
 
-    <!-- Formular pentru căutarea unei competiții -->
     <div class="search-form">
         <form action="/competitions/search" method="get">
-            <label for="code">Introduceți codul competiției:</label>
+            <label for="code">Introduceti codul competitiei:</label>
             <input type="text" id="code" name="code" required>
             <button type="submit"><i class="fas fa-search"></i> Caută</button>
         </form>
     </div>
 
-    <!-- Buton pentru deconectare -->
     <a href="/logout" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Ieșire Cont</a>
 </div>
 <footer>
-    <p>© 2025 MyApp. Toate drepturile rezervate. <a href="/privacy">Politica de confidențialitate</a></p>
 </footer>
 </body>
 </html>
