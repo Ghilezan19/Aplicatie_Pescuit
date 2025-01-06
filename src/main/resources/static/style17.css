@@ -39,7 +39,7 @@ tr:hover {
 
 .table-container {
     flex: 0 0 30%;
-    max-height: 90vh; /* Table height fixed for scrolling */
+    max-height: 90vh;
     overflow-y: auto;
     border-right: 1px solid #ccc;
     padding: 10px;

@@ -16,8 +16,6 @@
 <body>
 <div class="form-container">
     <h1>Adaugă Competiție</h1>
-
-    <!-- Afișare mesaj de eroare dacă există câmpuri nevalide -->
     <div id="error-message" class="error-message"></div>
 
     <form id="competition-form" action="/competitions/save" method="post" onsubmit="return validateForm()">
@@ -59,7 +57,7 @@
 <script>
     function validateForm() {
         const errorMessage = document.getElementById('error-message');
-        errorMessage.innerHTML = ''; // Resetează mesajele de eroare
+        errorMessage.innerHTML = '';
 
         const name = document.getElementById('name').value.trim();
         const location = document.getElementById('location').value.trim();
@@ -67,27 +65,23 @@
         const sectors = document.getElementById('sectors').value;
         const participants = document.getElementById('participants').value;
         const Days = document.getElementById('Days').value.trim();
-
-        // Verifică dacă toate câmpurile sunt completate
         if (!name || !location || !date || !days) {
             errorMessage.innerHTML = 'Toate câmpurile sunt obligatorii!';
             return false;
         }
 
-        // Verifică dacă valorile numerice sunt mai mari decât 0
         if (sectors <= 0 || participants <= 0) {
             errorMessage.innerHTML = 'Numărul de sectoare și participanți trebuie să fie mai mare decât 0!';
             return false;
         }
 
-        // Validare suplimentară pentru câmpul "days"
-        const daysPattern = /^[0-9]+(,[0-9]+)*$/; // Permite doar numere separate prin virgulă
+        const daysPattern = /^[0-9]+(,[0-9]+)*$/;
         if (!daysPattern.test(days)) {
             errorMessage.innerHTML = 'Câmpul "Zile Desfășurare" trebuie să conțină doar numere separate prin virgulă!';
             return false;
         }
 
-        return true; // Dacă toate validările sunt trecute, formularul poate fi trimis
+        return true;
     }
 </script>
 </body>

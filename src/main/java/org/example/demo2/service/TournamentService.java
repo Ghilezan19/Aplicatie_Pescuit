@@ -10,15 +10,12 @@ import java.util.List;
 public class TournamentService {
     @Autowired
     private TournamentRepository tournamentRepository;
-
     public Tournament saveTournament(Tournament tournament) {
         return tournamentRepository.save(tournament);
     }
-
     public List<Tournament> findAllTournaments() {
         return tournamentRepository.findAll();
     }
-
     public void deleteTournament(Long id) {
         tournamentRepository.deleteById(id);
     }

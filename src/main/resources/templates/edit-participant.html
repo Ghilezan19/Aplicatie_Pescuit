@@ -6,7 +6,7 @@
     <title>Editare Participant</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        /* General Reset */
+
         * {
             margin: 0;
             padding: 0;
@@ -40,7 +40,7 @@
             text-align: center;
             font-size: 2rem;
             margin-bottom: 20px;
-            color: #facc15; /* Golden accent */
+            color: #facc15;
             font-weight: 600;
         }
 
@@ -65,7 +65,7 @@
         }
 
         input:focus {
-            border-color: #facc15; /* Golden glow */
+            border-color: #facc15;
             outline: none;
             box-shadow: 0 0 8px #facc15;
         }
@@ -151,11 +151,7 @@
 
         <button type="submit">Salvează</button>
     </form>
-
-    <!-- Buton Înapoi -->
     <a th:href="@{/competitions/{competitionId}(competitionId=${participant.competitions.iterator().next().id})}" class="btn-back">Înapoi</a>
-
-    <!-- Formular Ștergere -->
     <form th:action="@{/participants/delete/{id}(id=${participant.id})}" method="post" onsubmit="return confirm('Sigur doriți să ștergeți acest participant?');">
         <button type="submit" class="btn-delete">Șterge Participant</button>
     </form>

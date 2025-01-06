@@ -1,4 +1,3 @@
-/* Fundal */
 body {
     margin: 0;
     padding: 0;
@@ -7,11 +6,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #0f172a; /* Fundal gri-albastru închis */
+    background: #0f172a;
     overflow: hidden;
     color: #f8f9fa;
 }
-
 .background-overlay {
     position: absolute;
     top: 0;
@@ -22,10 +20,8 @@ body {
     z-index: -1;
     filter: brightness(50%) blur(3px);
 }
-
-/* Container */
 .container {
-    background: rgba(20, 33, 61, 0.9); /* Gri-albastru închis */
+    background: rgba(20, 33, 61, 0.9);
     padding: 2rem;
     border-radius: 14px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
@@ -33,54 +29,45 @@ body {
     max-width: 480px;
     text-align: center;
 }
-
-/* Titlu */
 .container h1 {
     font-size: 2rem;
-    color: #FFD700; /* Galben-auriu premium */
+    color: #FFD700;
     margin-bottom: 1.2rem;
-    font-family: 'Playfair Display', serif; /* Font serif elegant */
+    font-family: 'Playfair Display', serif;
     text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
     letter-spacing: 1px;
 }
-
-/* Rol */
 .role {
     font-size: 1rem;
-    color: #e63946; /* Roșu intens */
+    color: #e63946;
     margin-bottom: 1rem;
 }
-
-/* Mesaj */
 .message {
     font-size: 1rem;
-    color: #a8dadc; /* Albastru deschis */
+    color: #a8dadc;
     margin-bottom: 1.5rem;
 }
-
-/* Butoane */
 .actions {
     display: flex;
     flex-direction: column;
-    gap: 0.8rem; /* Distanță mai mică între butoane */
+    gap: 0.8rem;
     margin-bottom: 1.5rem;
 }
-
 .btn {
     display: block;
     text-decoration: none;
-    padding: 0.6rem 1.2rem; /* Padding ajustat */
+    padding: 0.6rem 1.2rem;
     font-size: 0.9rem;
     font-weight: bold;
     text-align: center;
     border-radius: 8px;
     transition: all 0.3s ease;
-    width: 180px; /* Lățime fixă pentru dimensiune constantă */
-    margin: 0 auto; /* Centrare pe ecran */
+    width: 180px;
+    margin: 0 auto;
 }
 
 .btn-primary {
-    background: #FFD700; /* Galben-auriu */
+    background: #FFD700;
     color: #121212;
     box-shadow: 0 3px 8px rgba(255, 215, 0, 0.4);
 }
@@ -92,23 +79,21 @@ body {
 }
 
 .btn-secondary {
-    background: #1f2937; /* Gri închis */
+    background: #1f2937;
     color: #f8f9fa;
     border: 1px solid #475569;
 }
 
 .btn-secondary:hover {
-    background: #2d3748; /* Gri mai deschis */
+    background: #2d3748;
     color: #ffffff;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
 }
-
-/* Logout */
 .logout-btn {
     display: block;
     text-decoration: none;
     color: #FFD700;
-    font-size: 0.8rem; /* Font mai mic */
+    font-size: 0.8rem;
     margin-top: 1rem;
     transition: color 0.3s ease;
 }

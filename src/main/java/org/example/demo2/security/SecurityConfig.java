@@ -12,42 +12,33 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
-
     private final UserService userService;
-
     public SecurityConfig(UserService userService) {
         this.userService = userService;
     }
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        // Permite accesul la resurse statice pentru toți utilizatorii
                         .requestMatchers("/css/**", "/js/**", "/images/**", "/webjars/**").permitAll()
-                        // Restricții pentru utilizatori autentificați
                         .requestMatchers("/dashboard/**").hasAnyAuthority("PARTICIPANT", "ORGANIZER")
-                        .requestMatchers("/competitions/add").hasAuthority("ORGANIZER") // Doar ORGANIZER poate accesa
-                        .requestMatchers("/competitions").hasAnyAuthority("ORGANIZER","PARTICIPANT") // Acces la lista competițiilor
-                        .requestMatchers("/competitions/*").hasAnyAuthority("ORGANIZER","PARTICIPANT") // Acces la detaliile competiției
-                        .requestMatchers("/competitions/**").hasAuthority("ORGANIZER") // Sub-rute doar pentru ORGANIZER
-                        .requestMatchers("/participants/add").hasAuthority("ORGANIZER") // Numai ORGANIZER poate accesa
-                        // Alte resurse publice
+                        .requestMatchers("/competitions/add").hasAuthority("ORGANIZER") //
+                        .requestMatchers("/competitions").hasAnyAuthority("ORGANIZER","PARTICIPANT")
+                        .requestMatchers("/competitions/*").hasAnyAuthority("ORGANIZER","PARTICIPANT")
+                        .requestMatchers("/competitions/**").hasAuthority("ORGANIZER")
+                        .requestMatchers("/participants/add").hasAuthority("ORGANIZER")
                         .anyRequest().permitAll()
                 )
                 .formLogin(form -> form
-                        .loginPage("/login") // Specifică pagina de login personalizată
-                        .defaultSuccessUrl("/dashboard", true) // Redirecționează mereu la /dashboard după logare
-                        .failureUrl("/login?error=true") // Redirecționează la login în caz de eroare
-                        .permitAll() // Permite accesul la pagina de login
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/dashboard", true)
+                        .failureUrl("/login?error=true")
+                        .permitAll()
                 )
-
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/home")
@@ -55,7 +46,6 @@ public class SecurityConfig {
 
         return http.build();
     }
-
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(passwordEncoder());

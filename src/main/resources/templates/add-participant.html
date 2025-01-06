@@ -6,12 +6,11 @@
     <title>Adaugă Participant</title>
     <link rel="stylesheet" th:href="@{/style10.css}">
     <style>
-        /* Stilizare simplă pentru butonul de redirecționare */
         .dashboard-btn {
             display: inline-block;
             margin-top: 20px;
             padding: 10px 15px;
-            background-color: #238636; /* Verde */
+            background-color: #238636;
             color: white;
             text-decoration: none;
             border-radius: 5px;
@@ -22,11 +21,9 @@
         }
 
         .dashboard-btn:hover {
-            background-color: #2ea043; /* Verde mai deschis */
+            background-color: #2ea043;
             transform: translateY(-2px);
         }
-
-        /* Mesaj de succes */
         .success-message {
             color: green;
             margin-bottom: 20px;
@@ -38,13 +35,9 @@
 <div class="background-overlay"></div>
 <div class="form-container">
     <h1>Adaugă Participant</h1>
-
-    <!-- Afișare mesaj de succes -->
     <div th:if="${message}" class="success-message">
         <p th:text="${message}"></p>
     </div>
-
-    <!-- Formular pentru adăugarea participantului -->
     <form action="/participants/save" method="post">
         <label for="name">Nume Participant:</label>
         <input type="text" id="name" name="name" required>
@@ -59,8 +52,6 @@
 
         <button type="submit">Salvează</button>
     </form>
-
-    <!-- Buton pentru redirecționare la Dashboard -->
     <a href="/dashboard" class="dashboard-btn">Pagina Principala</a>
 </div>
 </body>

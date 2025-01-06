@@ -1,4 +1,3 @@
-/* Stil general */
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -7,12 +6,10 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: url('img.jpg') no-repeat center center fixed; /* Imaginea de fundal */
+    background: url('img.jpg') no-repeat center center fixed;
     background-size: cover;
     position: relative;
 }
-
-/* Suprapunere întunecată peste imagine pentru contrast */
 body::before {
     content: '';
     position: absolute;
@@ -20,16 +17,14 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6); /* Suprapunere neagră cu transparență */
+    background: rgba(0, 0, 0, 0.6);
     z-index: 0;
 }
-
-/* Container formular */
 .form-container {
     position: relative;
     z-index: 1;
-    background: rgba(20, 33, 61, 0.9); /* Fundal albastru închis */
-    border: 2px solid #FFD700; /* Galben pentru margini */
+    background: rgba(20, 33, 61, 0.9);
+    border: 2px solid #FFD700;
     border-radius: 15px;
     padding: 1rem;
     width: 100%;
@@ -37,16 +32,13 @@ body::before {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
     text-align: center;
 }
-
-/* Titlu */
 .form-container h1 {
     font-size: 20px;
     font-weight: bold;
-    color: #FFD700; /* Galben pentru titlu */
+    color: #FFD700;
     margin-bottom: 1rem;
 }
 
-/* Etichete */
 label {
     display: block;
     margin: 0.5rem 0 0.3rem;
@@ -54,8 +46,6 @@ label {
     text-align: left;
     color: #f5f5f5;
 }
-
-/* Input-uri */
 input, button {
     width: 100%;
     padding: 0.5rem;
@@ -66,18 +56,18 @@ input, button {
 }
 
 input {
-    background: #1b263b; /* Albastru foarte închis */
+    background: #1b263b;
     color: #f5f5f5;
 }
 
 input:focus {
     outline: none;
-    box-shadow: 0 0 5px #FFD700; /* Efect galben la focus */
+    box-shadow: 0 0 5px #FFD700;
 }
 
-/* Buton */
+
 button {
-    background: #FFD700; /* Fundal galben */
+    background: #FFD700;
     color: #121212;
     font-weight: bold;
     cursor: pointer;
@@ -85,12 +75,11 @@ button {
 }
 
 button:hover {
-    background: #e6c200; /* Galben mai închis la hover */
+    background: #e6c200;
     transform: translateY(-2px);
     box-shadow: 0 6px 15px rgba(255, 215, 0, 0.6);
 }
 
-/* Responsivitate */
 @media (max-width: 500px) {
     .form-container {
         padding: 0.8rem;

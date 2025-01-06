@@ -6,15 +6,12 @@ import java.util.Set;
 
 @Entity
 public class Participant {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private double kg;
     private String name;
     private int points;
-
-    // Relație Many-to-Many cu Competition
     @ManyToMany
     @JoinTable(
             name = "participant_competition",
@@ -22,34 +19,24 @@ public class Participant {
             inverseJoinColumns = @JoinColumn(name = "competition_id")
     )
     private Set<Competition> competitions = new HashSet<>();
-
-    // Getter și Setter pentru competitions
     public Set<Competition> getCompetitions() {
         return competitions;
     }
-
     public void setCompetitions(Set<Competition> competitions) {
         this.competitions = competitions;
     }
-
-    // Metoda addCompetition pentru a adăuga competiții la participant
     public void addCompetition(Competition competition) {
-        this.competitions.add(competition);  // Adaugă competiția în setul de competiții
+        this.competitions.add(competition);
     }
-
-    // Getter și Setter pentru id și name
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
-
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -60,6 +47,4 @@ public class Participant {
     public void setKg(double kg) {
         this.kg = kg;
     }
-
-
 }

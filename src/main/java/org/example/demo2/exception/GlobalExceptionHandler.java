@@ -6,11 +6,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
-
     @ExceptionHandler(Exception.class)
     public String handleException(Exception e, Model model) {
-        e.printStackTrace(); // Loghează excepția în consolă pentru depanare
+        e.printStackTrace();
         model.addAttribute("errorMessage", e.getMessage());
-        return "error"; // Redirecționează către pagina de eroare
+        return "error";
     }
 }

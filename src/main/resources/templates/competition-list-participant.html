@@ -5,50 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Competitions</title>
     <style>
-        /* General styling */
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 20px;
-            background: #0d1117; /* Elegant dark background */
-            color: #c9d1d9; /* Soft white text */
+            background: #0d1117;
+            color: #c9d1d9;
         }
 
         h1 {
             font-size: 2.8rem;
             text-align: center;
-            color: #58a6ff; /* Blue accent */
+            color: #58a6ff;
             margin-bottom: 20px;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             font-weight: bold;
         }
-
-        /* Table container */
         .table-container {
             max-width: 1200px;
             margin: 0 auto;
-            background: #161b22; /* Slightly lighter dark background */
+            background: #161b22;
             border-radius: 12px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
             overflow: hidden;
         }
-
-        /* Scrollable table wrapper */
         .table-wrapper {
             overflow-x: auto;
         }
-
-        /* Table styling */
         table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 900px; /* Ensure scrollability for smaller screens */
+            min-width: 900px;
             background-color: #161b22;
         }
 
         thead {
-            background: #21262d; /* Dark header background */
+            background: #21262d;
         }
 
         th {
@@ -56,33 +49,32 @@
             text-align: left;
             text-transform: uppercase;
             font-size: 0.85rem;
-            color: #8b949e; /* Muted text for header */
-            border-bottom: 2px solid #30363d; /* Header bottom border */
+            color: #8b949e;
+            border-bottom: 2px solid #30363d;
         }
 
         td {
             padding: 15px;
             font-size: 1rem;
-            color: #c9d1d9; /* Light text for rows */
-            border-bottom: 1px solid #30363d; /* Row bottom border */
+            color: #c9d1d9;
+            border-bottom: 1px solid #30363d;
         }
 
         tr:hover {
-            background-color: #21262d; /* Highlight row on hover */
+            background-color: #21262d;
             transition: background-color 0.2s ease;
         }
 
         td a {
-            color: #58a6ff; /* Blue links */
+            color: #58a6ff;
             text-decoration: none;
             font-weight: bold;
         }
 
         td a:hover {
-            color: #1f6feb; /* Brighter blue on hover */
+            color: #1f6feb;
         }
 
-        /* Button styling */
         .btn {
             display: inline-block;
             padding: 10px 15px;
@@ -90,18 +82,16 @@
             font-size: 0.9rem;
             font-weight: bold;
             text-align: center;
-            background: #238636; /* Green button */
-            color: #ffffff; /* White text */
+            background: #238636;
+            color: #ffffff;
             transition: all 0.3s ease;
         }
 
         .btn:hover {
-            background: #2ea043; /* Brighter green on hover */
+            background: #2ea043;
             transform: translateY(-2px);
             box-shadow: 0 4px 10px rgba(46, 160, 67, 0.4);
         }
-
-        /* Responsive design */
         @media (max-width: 768px) {
             table, thead, tbody, th, td, tr {
                 display: block;

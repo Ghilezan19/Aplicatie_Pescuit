@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalii Competiție</title>
     <style>
-        /* Reset general */
         * {
             margin: 0;
             padding: 0;
@@ -88,8 +87,8 @@
             background: #4CAF50;
             color: #fff;
             border: none;
-            padding: 3px 7px; /* Butoane mai mici */
-            border-radius: 3px; /* Colțuri mai rotunjite */
+            padding: 3px 7px;
+            border-radius: 3px;
             font-size: 12px;
             cursor: pointer;
             transition: background 0.3s ease;
@@ -101,8 +100,8 @@
 
         .button-container {
             display: flex;
-            gap: 5px; /* Spațiu între butoane */
-            align-items: center; /* Aliniere pe verticală */
+            gap: 5px;
+            align-items: center;
         }
 
         .details p {
@@ -127,7 +126,6 @@
             background: #e6c200;
         }
 
-        /* Scrollbar styling */
         .table-container::-webkit-scrollbar {
             width: 8px;
         }
@@ -155,9 +153,8 @@
         </tr>
         </thead>
         <tbody>
-        <!-- Iterăm prin participanți -->
         <tr th:each="participant, iterStat : ${participants}">
-            <td th:text="${iterStat.index + 1}"></td> <!-- Afișăm locul -->
+            <td th:text="${iterStat.index + 1}"></td>
             <td th:text="${participant.name}"></td>
             <td th:text="${participant.kg}"></td>
             <td>

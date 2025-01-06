@@ -11,17 +11,14 @@ import java.util.List;
 public class CatchService {
     @Autowired
     private CatchRepository catchRepository;
-
     public Catch saveCatch(Catch fishCatch) {
         return catchRepository.save(fishCatch);
     }
-
     public List<Catch> findByTournamentId(Long tournamentId) {
         return catchRepository.findAll().stream()
                 .filter(c -> c.getTournament().getId().equals(tournamentId))
                 .toList();
     }
-
     public void validateCatch(Long id) {
         Catch fishCatch = catchRepository.findById(id).orElseThrow();
         fishCatch.setValidated(true);

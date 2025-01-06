@@ -9,16 +9,13 @@ import java.util.List;
 
 @Service
 public class ParticipantService {
-
     private final ParticipantRepository participantRepository;
-
     @Autowired
     public ParticipantService(ParticipantRepository participantRepository) {
         this.participantRepository = participantRepository;
     }
-
     public void saveParticipant(Participant participant) {
-        participantRepository.save(participant);  // Salvează participantul, inclusiv relațiile many-to-many
+        participantRepository.save(participant);
     }
     public Participant getParticipantById(Long id) {
         return participantRepository.findById(id).orElseThrow(() -> new RuntimeException("Participant not found"));

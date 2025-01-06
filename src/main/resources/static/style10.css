@@ -1,4 +1,3 @@
-/* Stil general */
 body {
     margin: 0;
     padding: 0;
@@ -7,11 +6,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #0f172a; /* Fundal gri-albastru închis */
+    background: #0f172a;
     overflow: hidden;
 }
-
-/* Fundal cu imagine */
 .background-overlay {
     position: absolute;
     top: 0;
@@ -22,10 +19,8 @@ body {
     z-index: -2;
     filter: brightness(50%) blur(3px);
 }
-
-/* Container formular */
 .form-container {
-    background: rgba(20, 33, 61, 0.95); /* Gri-albastru închis */
+    background: rgba(20, 33, 61, 0.95);
     padding: 2rem;
     border-radius: 14px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
@@ -34,8 +29,6 @@ body {
     text-align: center;
     animation: fadeIn 1s ease-out;
 }
-
-/* Animație fade-in */
 @keyframes fadeIn {
     0% {
         opacity: 0;
@@ -46,78 +39,68 @@ body {
         transform: translateY(0);
     }
 }
-
-/* Titlu formular */
 .form-container h1 {
     font-size: 2rem;
-    color: #FFD700; /* Galben-auriu premium */
+    color: #FFD700;
     margin-bottom: 1.2rem;
-    font-family: 'Playfair Display', serif; /* Font serif elegant */
+    font-family: 'Playfair Display', serif;
     text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
     letter-spacing: 1px;
 }
-
-/* Etichete */
 label {
     display: block;
     font-size: 0.9rem;
-    color: #d1d5db; /* Gri deschis */
+    color: #d1d5db;
     margin: 0.5rem 0 0.2rem;
     font-weight: 500;
 }
-
-/* Input-uri */
 input, select {
     width: 100%;
     padding: 0.7rem;
     margin-bottom: 1rem;
-    border: 1px solid #475569; /* Gri neutru */
+    border: 1px solid #475569;
     border-radius: 10px;
-    background: #1f2937; /* Gri închis */
-    color: #f8f9fa; /* Alb-gri */
+    background: #1f2937;
+    color: #f8f9fa;
     font-size: 0.9rem;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
 }
 
 input:focus, select:focus {
-    border-color: #FFD700; /* Galben-auriu */
+    border-color: #FFD700;
     outline: none;
     box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
-    background: #273549; /* Gri mai închis */
+    background: #273549;
 }
-
-/* Buton */
 button {
     width: 100%;
     padding: 0.8rem;
     font-size: 1rem;
     font-weight: bold;
-    color: #121212; /* Text închis */
-    background: rgb(255, 215, 0); /* Galben-auriu */
+    color: #121212;
+    background: rgb(255, 215, 0);
     border: none;
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.4); /* Umbra mai subtilă */
+    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.4);
     font-family: 'Roboto', sans-serif;
     letter-spacing: 0.5px;
 }
 
 button:hover {
-    background: rgba(255, 215, 0, 0.3); /* Galben mai intens */
-    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3); /* Strălucire redusă */
+    background: rgba(255, 215, 0, 0.3);
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
     transform: translateY(-2px);
 }
 
 button:active {
     transform: translateY(0);
-    box-shadow: 0 2px 6px rgba(255, 215, 0, 0.3); /* Umbra la apăsare redusă */
+    box-shadow: 0 2px 6px rgba(255, 215, 0, 0.3);
 }
-
-/* Subtilitate pe hover pentru input-uri */
 input:hover, select:hover {
-    background: #2d3748; /* Gri mai cald */
+    background: #2d3748;
     color: #f8f9fa;
     transition: background 0.3s ease, color 0.3s ease;
 }
