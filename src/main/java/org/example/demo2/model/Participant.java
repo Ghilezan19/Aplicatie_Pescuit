@@ -12,6 +12,8 @@ public class Participant {
     private double kg;
     private String name;
     private int points;
+    private String sector; // Nou
+    private String stand;  // Nou
     @ManyToMany
     @JoinTable(
             name = "participant_competition",
@@ -43,7 +45,20 @@ public class Participant {
     public double getKg() {
         return kg;
     }
+    public String getSector() {
+        return sector;
+    }
 
+    public void setSector(String sector) {
+        this.sector = sector;
+    }
+    public String getStand() {
+        return stand;
+    }
+
+    public void setStand(String stand) {
+        this.stand = stand;
+    }
     public void setKg(double kg) {
         this.kg = kg;
     }

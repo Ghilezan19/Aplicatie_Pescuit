@@ -3,6 +3,7 @@ import org.example.demo2.model.Competition;
 import org.example.demo2.model.Participant;
 import org.example.demo2.repository.CompetitionRepository;
 import org.example.demo2.service.CompetitionService;
+import org.example.demo2.service.ParticipantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,6 +24,10 @@ public class CompetitionController {
         this.competitionService = competitionService;
         this.competitionRepository = competitionRepository;
     }
+
+    @Autowired
+    private ParticipantService participantService; // Asigură-te că adaugi acest câmp
+
     @GetMapping("/competitions")
     public String getCompetitions(Model model) {
         List<Competition> competitions = competitionRepository.findAllByOrderByDateAsc();
@@ -141,4 +146,16 @@ public class CompetitionController {
             return "participant_dashboard";
         }
     }
+    @PostMapping("/setSectorAndStand/{participantId}")
+    @ResponseBody
+    public String setSectorAndStand(@PathVariable Long participantId,
+                                    @RequestParam("sector") String sector,
+                                    @RequestParam("stand") String stand) {
+        Participant participant = participantService.getParticipantById(participantId);
+        participant.setSector(sector);
+        participant.setStand(stand);
+        participantService.saveParticipant(participant);
+        return "Sectorul și standul au fost setate cu succes!";
+    }
+
 }
