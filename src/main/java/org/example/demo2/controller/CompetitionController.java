@@ -26,7 +26,6 @@ public class CompetitionController {
     @GetMapping("/competitions")
     public String getCompetitions(Model model) {
         List<Competition> competitions = competitionRepository.findAllByOrderByDateAsc();
-        System.out.println("Competitions sorted by date:");
         competitions.forEach(c -> System.out.println(c.getName() + " - " + c.getDate()));
         model.addAttribute("competitions", competitions);
         return "competitions";

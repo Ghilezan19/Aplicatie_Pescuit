@@ -19,7 +19,4 @@ public interface CompetitionRepository extends JpaRepository<Competition, Long> 
     boolean existsByCode(String code);
     Optional<Competition> findByCode(String code);
 
-
-
-
 }
